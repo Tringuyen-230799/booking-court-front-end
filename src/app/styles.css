@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #11d452;
+  --color-background-light: #f6f8f6;
+  --color-background-dark: #102216;
+  --color-primary-content: #052e12;
+  --color-surface-light: #ffffff;
+  --color-surface-dark: #1a2e22;
+
+  --font-family-display: "Lexend", sans-serif;
+  --font-family-body: "Noto Sans", sans-serif;
+
+  --font-size-large: 1.125rem;
+  --font-size-medium: 1rem;
+  --font-size-small: 0.875rem;
+  --font-size-x-small: 0.75rem;
+  
+  --font-size-heading-sm: 1.5rem;
+  --line-height-heading-sm: 2rem;
+  --letter-spacing-heading-sm: -0.025em;
+  
+  --font-size-heading-md: 2rem;
+  --line-height-heading-md: 2.5rem;
+  --letter-spacing-heading-md: -0.025em;
+  
+  --font-size-heading-lg: 2.5rem;
+  --line-height-heading-lg: 3rem;
+  --letter-spacing-heading-lg: -0.025em;
+  
+  --font-size-heading-xl: 3rem;
+  --line-height-heading-xl: 3.5rem;
+  --letter-spacing-heading-xl: -0.025em;
+  
+  --font-size-body-sm: 0.875rem;
+  --line-height-body-sm: 1.5rem;
+  
+  --font-size-body-md: 1rem;
+  --line-height-body-md: 1.75rem;
+  
+  --font-size-body-lg: 1.125rem;
+  --line-height-body-lg: 1.875rem;
+  
+  --font-size-action-sm: 0.75rem;
+  --line-height-action-sm: 1rem;
+  --letter-spacing-action-sm: 0.025em;
+  --font-weight-action-sm: 600;
+  
+  --font-size-action-md: 0.875rem;
+  --line-height-action-md: 1.25rem;
+  --letter-spacing-action-md: 0.015em;
+  --font-weight-action-md: 600;
+  
+  --font-size-action-lg: 1rem;
+  --line-height-action-lg: 1.5rem;
+  --letter-spacing-action-lg: 0.015em;
+  --font-weight-action-lg: 600;
+
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
+
+body {
+  font-family: var(--font-family-body);
+  margin: 0;
+  padding: 0;
+}
