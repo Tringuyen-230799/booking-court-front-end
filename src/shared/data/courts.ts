@@ -3,7 +3,8 @@ import { Court } from '../types/court';
 export const mockCourts: Court[] = [
   {
     id: '1',
-    title: 'Premium Tennis Court A',
+    title: 'Tennis',
+    category: 'racket',
     imageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400',
     address: '123 Sports Complex Ave, Downtown',
     price: 45,
@@ -11,7 +12,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '2',
-    title: 'Basketball Court Elite',
+    title: 'Basketball',
+    category: 'ball',
     imageUrl: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400',
     address: '456 Athletic Center Blvd, Midtown',
     price: 35,
@@ -19,7 +21,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '3',
-    title: 'Badminton Hall Pro',
+    title: 'Badminton',
+    category: 'racket',
     imageUrl: 'https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=400',
     address: '789 Recreation St, Eastside',
     price: 28,
@@ -27,7 +30,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '4',
-    title: 'Tennis Court Classic',
+    title: 'Tennis',
+    category: 'racket',
     imageUrl: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=400',
     address: '321 Game Point Lane, Westfield',
     price: 40,
@@ -35,7 +39,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '5',
-    title: 'Indoor Soccer Arena',
+    title: 'Indoor',
+    category: 'indoor',
     imageUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400',
     address: '654 Football Plaza, Northgate',
     price: 55,
@@ -43,7 +48,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '6',
-    title: 'Squash Court Premium',
+    title: 'Squash',
+    category: 'racket',
     imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',
     address: '987 Racquet Club Dr, Southshore',
     price: 38,
@@ -51,7 +57,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '7',
-    title: 'Volleyball Court Indoor',
+    title: 'Volleyball',
+    category: 'team',
     imageUrl: 'https://images.unsplash.com/photo-1547347298-4074fc3086f0?w=400',
     address: '147 Spike Avenue, Central Park',
     price: 32,
@@ -59,7 +66,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '8',
-    title: 'Tennis Court Deluxe',
+    title: 'Tennis',
+    category: 'racket',
     imageUrl: 'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=400',
     address: '258 Grand Slam Road, Uptown',
     price: 50,
@@ -67,7 +75,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '9',
-    title: 'Basketball Court Standard',
+    title: 'Basketball',
+    category: 'ball',
     imageUrl: 'https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?w=400',
     address: '369 Dunk Street, Old Town',
     price: 25,
@@ -75,7 +84,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '10',
-    title: 'Badminton Court Express',
+    title: 'Badminton',
+    category: 'racket',
     imageUrl: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=400',
     address: '741 Shuttle Lane, New District',
     price: 22,
@@ -83,7 +93,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '11',
-    title: 'Futsal Court Pro',
+    title: 'Futsal',
+    category: 'team',
     imageUrl: 'https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=400',
     address: '852 Futsal Plaza, Sports Zone',
     price: 42,
@@ -91,7 +102,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '12',
-    title: 'Table Tennis Hall',
+    title: 'Table Tennis',
+    category: 'racket',
     imageUrl: 'https://images.unsplash.com/photo-1609906851638-9b0e6bdee9cd?w=400',
     address: '963 Ping Pong Boulevard, Game Center',
     price: 18,
@@ -99,7 +111,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '13',
-    title: 'Tennis Court Outdoor',
+    title: 'Tennis',
+    category: 'outdoor',
     imageUrl: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=400',
     address: '159 Fresh Air Court, Garden District',
     price: 30,
@@ -107,7 +120,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '14',
-    title: 'Multi-Sport Arena',
+    title: 'Multi-Sport',
+    category: 'indoor',
     imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',
     address: '753 Versatile Way, Sports Complex',
     price: 48,
@@ -116,6 +130,7 @@ export const mockCourts: Court[] = [
   {
     id: '15',
     title: 'Basketball Court Outdoor',
+    category: 'outdoor',
     imageUrl: 'https://images.unsplash.com/photo-1519861531473-9200262188bf?w=400',
     address: '486 Street Ball Avenue, Urban Park',
     price: 20,
@@ -123,7 +138,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '16',
-    title: 'Pickleball Court',
+    title: 'Pickleball',
+    category: 'racket',
     imageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400',
     address: '357 Pickle Drive, Community Center',
     price: 26,
@@ -131,7 +147,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '17',
-    title: 'Handball Court Indoor',
+    title: 'Handball',
+    category: 'ball',
     imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',
     address: '680 Palm Court, Fitness Plaza',
     price: 35,
@@ -139,7 +156,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '18',
-    title: 'Tennis Court VIP',
+    title: 'Tennis',
+    category: 'individual',
     imageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400',
     address: '791 Luxury Sports Lane, Elite Club',
     price: 65,
@@ -147,7 +165,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '19',
-    title: 'Padel Court Modern',
+    title: 'Padel',
+    category: 'racket',
     imageUrl: 'https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=400',
     address: '842 Padel Paradise, Modern Sports',
     price: 44,
@@ -155,7 +174,8 @@ export const mockCourts: Court[] = [
   },
   {
     id: '20',
-    title: 'Basketball Court Premium',
+    title: 'Basketball',
+    category: 'team',
     imageUrl: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400',
     address: '935 Championship Court, Victory Complex',
     price: 52,
@@ -185,4 +205,9 @@ export const searchCourts = (query: string): Court[] => {
     court.title.toLowerCase().includes(lowercaseQuery) ||
     court.address.toLowerCase().includes(lowercaseQuery)
   );
+};
+
+// Utility function to filter courts by category
+export const getCourtsByCategory = (category: 'racket' | 'ball' | 'indoor' | 'outdoor' | 'team' | 'individual'): Court[] => {
+  return mockCourts.filter(court => court.category === category);
 };

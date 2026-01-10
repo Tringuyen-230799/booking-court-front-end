@@ -3,7 +3,6 @@
 import Card from "@/components/card";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
-import { PATH } from "shared/constant/path";
 import { mockCourts } from "shared/data/courts";
 
 export default function Page() {

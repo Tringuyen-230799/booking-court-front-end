@@ -1,9 +1,11 @@
 'use client';
 import { ButtonHTMLAttributes } from "react";
 import Typography from "../typography";
+import { cn } from "shared/utils/cn";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline";
+  size?: "xs" | "sm" | "md" | "lg";
   children: React.ReactNode;
   fullWidth?: boolean;
   onClick?: () => void;
@@ -11,17 +13,28 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const getVariantStyles = (variant: "primary" | "secondary" | "outline") => {
   const styles = {
-    primary: "bg-primary text-[#0d1b12] shadow-sm",
+    primary: "bg-primary text-[#0d1b12] shadow-sm font-bold",
     secondary:
-      "bg-secondary text-[#0d1b12] hover:bg-[#d5eadd] ",
+      "bg-white text-[#0d1b12] hover:bg-[#d5eadd] ",
     outline:
       "border-2 border-primary text-primary hover:bg-primary hover:text-[#0d1b12]",
   };
   return styles[variant];
 };
 
+const getSizeStyles = (size: "xs" | "sm" | "md" | "lg") => {
+  const styles = {
+    xs: "h-8 px-3 text-xs min-w-[64px]",
+    sm: "h-9 px-4 text-sm min-w-[72px]", 
+    md: "h-10 px-5 text-sm min-w-[84px]",
+    lg: "h-12 px-8 text-base min-w-[96px]",
+  };
+  return styles[size];
+};
+
 export default function Button({
   variant = "primary",
+  size = "md",
   children,
   fullWidth = false,
   className = "",
@@ -29,17 +42,23 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 -4 text-sm font-bold leading-normal tracking-[0.015em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed";
+    "flex cursor-pointer items-center justify-center overflow-hidden rounded-lg font-bold leading-normal tracking-[0.015em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed";
   const variantStyles = getVariantStyles(variant);
-  const widthStyles = fullWidth ? "w-full" : "";
+  const sizeStyles = getSizeStyles(size);
 
   return (
     <button
-      className={`${baseStyles} ${variantStyles} ${widthStyles} ${className}`}
+      className={cn(
+        baseStyles,
+        variantStyles,
+        sizeStyles,
+        fullWidth && "w-full",
+        className
+      )}
       onClick={() => onClick && onClick()}
       {...props}
     >
-      <Typography variant="action" size="md">
+      <Typography variant="action" size="md" className="font-bold">
         {children}
       </Typography>
     </button>
