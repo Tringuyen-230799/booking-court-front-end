@@ -1,18 +1,44 @@
-import Typography from "@/components/typography";
+"use client";
+import Banner from "./container/Banner";
+import Icon from "shared/components/Icon";
+import { MdOutlineSort } from "react-icons/md";
+import FilterProduct from "./container/FilterProduct";
+import CourtList from "./container/CourtList";
+import Button from "@/components/button";
 
 export default function Home() {
   return (
     <main>
-      <section className="relative">
-        <div
-          className="w-full flex flex-col items-center justify-center min-h-125 px-4 py-20 bg-cover bg-center bg-no-repeat relative"
-          data-alt="Action shot of a tennis player serving on a bright court"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDrBfskpvyQMJqTMq1Ml5Tc-k6zaGb0VEXffhoqlwmSTnEyByBVYyP4ypgAtCS-uTI2cK1HrvXsrPM-CFP1hZFY7wOCdS5fDsfH1Dzm7zJNj40zQ2z1lSA4f3t0pHn0Oe1eYh0tdkXRUxBoEzmLmaMlv5sh1X1Qt3dIj7zWmUtgdL5TUeErNsLNfFCRe4DyCLgcnYe6hHBW3A6-IVycGFUjWGTjMKeSUQkf3PRy_CLxLUl0wT9Mu7VnnzOgwVzqXMdgT6w_eFp2vCw")',
-          }}
-        />
-        <Typography variant="heading" size="lg" className="text-primary">Game On. Book Your Court Instantly.</Typography>
+      <Banner />
+      <section className="py-12 px-4 md:px-8 lg:px-12 xl:px-24 bg-background-light">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="flex flex-col md:flex-row items-end md:items-center justify-between mb-8 gap-4">
+            <div>
+              <h2 className="text-3xl font-bold">Available Courts</h2>
+              <p className="text-gray-500 mt-1">
+                Book instantly from top-rated venues
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <button className="lg:hidden flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
+                <span className="material-symbols-outlined text-[18px]">
+                  filter_list
+                </span>
+                Filters
+              </button>
+              <Button variant="secondary">
+                <div className="flex gap-1">
+                  <Icon icon={MdOutlineSort} size="lg" />
+                  Sort: Recommended
+                </div>
+              </Button>
+            </div>
+          </div>
+          <div className="flex flex-col lg:flex-row gap-8 items-start">
+            <FilterProduct />
+            <CourtList />
+          </div>
+        </div>
       </section>
     </main>
   );

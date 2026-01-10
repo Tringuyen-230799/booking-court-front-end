@@ -6,4 +6,5 @@ export interface Court {
   address: string;
   price: number;
   rating?: number;
+  category: string;
 }

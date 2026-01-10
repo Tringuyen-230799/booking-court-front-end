@@ -8,8 +8,8 @@
   --color-surface-light: #ffffff;
   --color-surface-dark: #1a2e22;
 
-  --font-family-display: "Lexend", sans-serif;
-  --font-family-body: "Noto Sans", sans-serif;
+  --font-family-display: var(--font-lexend), "Lexend", sans-serif;
+  --font-family-body: var(--font-noto-sans), "Noto Sans", sans-serif;
 
   --font-size-large: 1.125rem;
   --font-size-medium: 1rem;
