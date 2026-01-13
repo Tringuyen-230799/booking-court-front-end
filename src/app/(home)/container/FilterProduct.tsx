@@ -1,3 +1,4 @@
+'use client';
 import FilterPrice from "@/components/FilterPrice";
 import GroupCheckbox from "@/components/GroupCheckbox";
 import GroupRadioBox from "@/components/GroupRadioBox";

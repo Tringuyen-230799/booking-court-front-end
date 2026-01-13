@@ -23,9 +23,9 @@ const GroupRadioBox: React.FC<GroupRadioBoxProps> = ({
 }) => {
   return (
     <div className={cn("space-y-2.5", className)}>
-      {options.map((option) => (
+      {options.map((option, index) => (
         <label
-          key={option.value}
+          key={option.value + index}
           className="flex items-center gap-3 cursor-pointer group"
         >
           <input

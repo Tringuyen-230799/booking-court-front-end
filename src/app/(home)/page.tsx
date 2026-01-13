@@ -1,12 +1,13 @@
-"use client";
 import Banner from "./container/Banner";
 import Icon from "shared/components/Icon";
 import { MdOutlineSort } from "react-icons/md";
 import FilterProduct from "./container/FilterProduct";
 import CourtList from "./container/CourtList";
 import Button from "@/components/button";
+import { getCourts } from "../court/request";
 
-export default function Home() {
+export default async function Home() {
+  const courts = await getCourts();
   return (
     <main>
       <Banner />
@@ -36,7 +37,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col lg:flex-row gap-8 items-start">
             <FilterProduct />
-            <CourtList />
+            <CourtList courts={courts?.courts}/>
           </div>
         </div>
       </section>

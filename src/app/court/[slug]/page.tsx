@@ -1,20 +1,19 @@
 import Breadcrumb from "@/components/breadcrumb";
 import Link from "next/link";
-import { mockCourts } from "shared/data/courts";
-import { Court } from "shared/types/court";
+// import { Court } from "shared/types/court";
 
 // Server-side function to simulate async data fetching
-async function getCourtBySlug(slug: string): Promise<Court | null> {
-  // Simulate server delay (this triggers loading.tsx)
-  await new Promise(resolve => setTimeout(resolve, 1000));
+// async function getCourtBySlug(slug: string): Promise<Court | null> {
+//   // Simulate server delay (this triggers loading.tsx)
+//   await new Promise(resolve => setTimeout(resolve, 1000));
   
-  // Find court by matching slug with title
-  const court = mockCourts.find(c => 
-    c.title.toLowerCase().replace(/\s+/g, '-') === slug
-  );
+//   // Find court by matching slug with title
+//   const court = mockCourts.find(c => 
+//     c.title.toLowerCase().replace(/\s+/g, '-') === slug
+//   );
   
-  return court || null;
-}
+//   return court || null;
+// }
 
 interface PageProps {
   params: { slug: string };
@@ -24,7 +23,8 @@ export default async function CourtDetail({ params }: PageProps) {
   const { slug } = params;
   
   // This runs on the server - loading.tsx shows during this time
-  const court = await getCourtBySlug(slug);
+  // const court = await getCourtBySlug(slug);
+  const court = {}
 
   if (!court) {
     return (
@@ -61,7 +61,7 @@ export default async function CourtDetail({ params }: PageProps) {
           items={[
             { label: "Home", href: "/" },
             { label: "Courts", href: "/court" },
-            { label: court.title, isCurrentPage: true },
+            // { label: court.title, isCurrentPage: true },
           ]}
         />
         {/* Server-Rendered Content */}

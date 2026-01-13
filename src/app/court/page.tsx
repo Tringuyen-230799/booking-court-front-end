@@ -1,31 +1,28 @@
-"use client";
-
 import Card from "@/components/card";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
-import { mockCourts } from "shared/data/courts";
+import { getCourts } from "./request";
 
-export default function Page() {
-  const courts = mockCourts;
-  const router = useRouter();
+export default async function Page() {
+  const courts = await getCourts();
 
-  const handleClickItem = useCallback(
-    (id: string) => {
-      // Convert title to slug for URL
-      const court = courts.find((court) => court.id === id);
-      if (court) {
-        const slug = court.title.toLowerCase().replace(/\s+/g, "-");
-        router.push(`/court/${slug}`);
-      }
-    },
-    [courts, router]
-  );
+  console.log(courts);
+  // const handleClickItem = useCallback(
+  //   (id: string) => {
+  //     // Convert title to slug for URL
+  //     const court = courts.find((court) => court.id === id);
+  //     if (court) {
+  //       const slug = court.title.toLowerCase().replace(/\s+/g, "-");
+  //       router.push(`/court/${slug}`);
+  //     }
+  //   },
+  //   [courts, router]
+  // );
+
   return (
     <div className="flex overflow-hidden justify-center w-full items-center">
       <div className="flex gap-2 max-w-350 overflow-hidden">
         {courts.map((court) => {
           return (
-            <Card key={court.id} onClick={handleClickItem} court={court} />
+            <Card key={court.id} onClick={() => {}} court={court} />
           );
         })}
       </div>
