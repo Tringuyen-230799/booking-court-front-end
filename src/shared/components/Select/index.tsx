@@ -296,7 +296,7 @@ export default function Select({
 
                 return (
                   <div
-                    key={option.value}
+                    key={option.value + index}
                     className={cn(
                       "px-3 py-2 cursor-pointer transition-colors rounded-sm",
                       "flex items-center justify-between hover:bg-primary duration-300",

@@ -1,10 +1,16 @@
 export interface Court {
-  id: string | number;
-  title: string;
-  imageUrl?: string;
+  id: string;
+  name: string;
+  rating: number | null;
   onClick?: (id: string) => void;
   address: string;
-  price: number;
-  rating?: number;
-  category: string;
+  hourlyPrice: number; // Prisma Decimal serialized as string
+  eventSurcharge?: number | null;
+  isAvailable: boolean;
+  isIndoor: boolean;
+  categories?: { name: string }[];
+  facilities?: { name: string }[];
+  images?: { imageUrl: string }[];
+  createdAt: Date;
+  updatedAt: Date;
 }

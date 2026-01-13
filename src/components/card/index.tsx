@@ -1,3 +1,4 @@
+"use client";
 import { Court } from "shared/types/court";
 import Button from "../button";
 import Badge from "../badge";
@@ -12,12 +13,12 @@ interface CardProps {
 }
 
 export default function Card({ court, onClick }: CardProps) {
-  const { address, id, price, title, imageUrl, rating, category } = court;
+  const { address, id, hourlyPrice, name, images, rating, categories } = court;
 
   return (
     <div className="max-w-80 min-w-70 cursor-pointer flex flex-col rounded-lg overflow-hidden border border-[#e7f3eb] bg-white hover:shadow-lg transition-all">
       <div className="relative h-48 bg-gray-200">
-        <div className="absolute top-3 right-3 z-50 bg-white px-2 py-1 rounded shadow flex items-center gap-1">
+        <div className="absolute top-3 right-3 z-50  bg-white px-2 py-1 rounded shadow flex items-center gap-1">
           <Typography
             variant="action"
             size="sm"
@@ -32,7 +33,9 @@ export default function Card({ court, onClick }: CardProps) {
             className="w-full h-full bg-cover bg-center hover:scale-125 transition-all duration-700"
             data-alt="Outdoor street basketball court"
             style={
-              imageUrl ? { backgroundImage: `url("${imageUrl}")` } : undefined
+              images
+                ? { backgroundImage: `url("${images[0].imageUrl}")` }
+                : undefined
             }
           />
         </div>
@@ -41,18 +44,18 @@ export default function Card({ court, onClick }: CardProps) {
         <div className="flex justify-between items-center w-full">
           <div className="w-1/2">
             <Typography className="truncate" variant="heading" size="xs">
-              {title}
+              {name}
             </Typography>
           </div>
           <div className="w-full flex justify-end">
             <Badge variant="primary" size="xs">
-              {category}
+              {categories?.[0]?.name}
             </Badge>
           </div>
         </div>
         <p className="text-sm text-gray-500 flex items-center gap-1 w-full">
           <Icon icon={FaMapMarkerAlt} size="xs" />
-          <Typography as="p" variant="action" color="muted" size="md">
+          <Typography as="span" variant="action" color="muted" size="md">
             {address}
           </Typography>
         </p>
@@ -62,7 +65,7 @@ export default function Card({ court, onClick }: CardProps) {
               Starting from
             </Typography>
             <Typography variant="action" color="default" size="lg">
-              ${price}
+              ${hourlyPrice}
             </Typography>
             <Typography variant="action" color="muted">
               /hr
