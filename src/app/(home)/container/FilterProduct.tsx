@@ -1,23 +1,31 @@
-'use client';
-import FilterPrice from "@/components/FilterPrice";
-import GroupCheckbox from "@/components/GroupCheckbox";
-import GroupRadioBox from "@/components/GroupRadioBox";
+"use client";
+import FilterPrice from "shared/components/FilterPrice";
+import GroupCheckbox from "shared/components/GroupCheckbox";
+import GroupRadioBox from "shared/components/GroupRadioBox";
 import Icon from "shared/components/Icon";
 import { HiOutlineTicket } from "react-icons/hi";
-import Rating from "@/components/rating";
+import Rating from "shared/components/rating";
+import Typography from "shared/components/typography";
+import Button from "shared/components/button";
+import TextField from "shared/components/TextField";
+import { FaSearch } from "react-icons/fa";
+import Divider from "shared/components/Divider";
 
 export default function FilterProduct() {
   return (
-    <aside className="w-full lg:w-[280px] shrink-0 space-y-6 lg:sticky lg:top-24 z-30">
-      <div className="bg-white rounded-xl border border-[#e7f3eb] p-5 shadow-sm">
-        <div className="flex items-center justify-between mb-6">
+    <aside className="w-full lg:w-70 shrink-0 space-y-6 lg:sticky lg:top-24 z-30">
+      <div className="bg-white rounded-xl border border-[#e7f3eb] p-5 shadow-sm space-y-4">
+        <div className="flex items-center justify-between">
           <h3 className="font-bold text-lg">Filters</h3>
-          <button className="text-xs font-bold text-primary hover:text-[#0fc24a] transition-colors">
+          <Button variant="link" size="sm">
             Reset All
-          </button>
+          </Button>
         </div>
-        <div className="mb-6 border-b border-[#f0f0f0] pb-6">
-          <h4 className="font-bold text-sm mb-3 text-gray-700">Sport Type</h4>
+        <TextField leadingIcon={FaSearch} size="sm" placeholder="Seach court" />
+        <div className="">
+          <Typography as="h4" variant="heading" size="sm" color="muted">
+            Sport Type
+          </Typography>
           <div className="space-y-2.5">
             <GroupCheckbox
               onChange={() => console.log("checked")}
@@ -43,22 +51,26 @@ export default function FilterProduct() {
             />
           </div>
         </div>
-        <div className="mb-6 border-b border-[#f0f0f0] pb-6">
-          <h4 className="font-bold text-sm mb-3 text-gray-700">
+        <Divider />
+        <div className="">
+          <Typography as="h4" variant="heading" size="sm" color="muted">
             Price Range / hr
-          </h4>
+          </Typography>
           <FilterPrice
-            min={10}
-            max={500}
+            min={0}
+            max={1000000}
             onChange={() => console.log("price")}
             value={{
-              min: 10,
+              min: 0,
               max: 500,
             }}
           />
         </div>
-        <div className="mb-6 border-b border-[#f0f0f0] pb-6">
-          <h4 className="font-bold text-sm mb-3 text-gray-700">Amenities</h4>
+        <Divider />
+        <div className="">
+          <Typography as="h4" variant="heading" size="sm" color="muted">
+            Amenities
+          </Typography>
           <div className="space-y-2.5">
             <GroupCheckbox
               options={[
@@ -77,42 +89,45 @@ export default function FilterProduct() {
             />
           </div>
         </div>
+        <Divider />
         <div>
-          <h4 className="font-bold text-sm mb-3 text-gray-700">User Rating</h4>
-          <div className="space-y-2.5">
+          <Typography as="h4" variant="heading" size="sm" color="muted">
+            User Rating
+          </Typography>
+          <div className="space-y-2.5 w-full">
             <GroupRadioBox
               className="space-y-3"
               onChange={() => console.log("checked")}
               options={[
                 {
                   customLabel: (label) => (
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
                       <Rating rating={5} size="md" /> {label}
                     </div>
                   ),
-                  value: "lighting",
-                  label: "From 5 stars",
+                  value: "5_stars",
+                  label: "",
                 },
                 {
                   customLabel: (label) => (
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
                       <Rating rating={4} size="md" /> {label}
                     </div>
                   ),
-                  value: "lighting",
-                  label: "From 4 stars",
+                  value: "4_stars",
+                  label: "",
                 },
                 {
                   customLabel: (label) => (
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
                       <Rating rating={3} size="md" /> {label}
                     </div>
                   ),
-                  value: "lighting",
-                  label: "From 3 stars",
+                  value: "3_stars",
+                  label: "",
                 },
               ]}
-              selectedValue={"lighting"}
+              selectedValue={"4_stars"}
             />
           </div>
         </div>
@@ -120,10 +135,10 @@ export default function FilterProduct() {
       <div className="bg-[#e7f3eb] rounded-xl p-5 text-center mt-6 hidden lg:block border border-primary/20">
         <Icon icon={HiOutlineTicket} size="lg" variant="primary" />
         <h4 className="font-bold text-[#0d1b12]">Season Pass</h4>
-        <p className="text-xs text-gray-500 mt-1 mb-3">
+        <p className="text-sm text-gray-500 mt-1 mb-3">
           Get unlimited bookings with a monthly pass starting at $99.
         </p>
-        <button className="text-xs font-bold text-primary hover:underline">
+        <button className="text-sm font-bold text-primary hover:underline">
           Learn More
         </button>
       </div>

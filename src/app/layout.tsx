@@ -1,4 +1,4 @@
-import Header from "@/components/header";
+import Header from "shared/components/header";
 import { NAV_LINKS } from "shared/constant/path";
 import { Lexend, Noto_Sans } from "next/font/google";
 import "./styles.css";

@@ -1,8 +1,8 @@
 'use client';
 import Icon from "shared/components/Icon";
 import { IoIosArrowDown } from "react-icons/io";
-import Card from "@/components/card";
-import Button from "@/components/button";
+import Card from "shared/components/card";
+import Button from "shared/components/button";
 
 interface CourtListProps {
   courts?: Array<any>;

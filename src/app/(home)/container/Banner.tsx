@@ -4,7 +4,7 @@ import { FaBasketballBall } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
-import Button from "@/components/button";
+import Button from "shared/components/button";
 import Icon from "shared/components/Icon";
 
 export default function Banner() {
@@ -27,7 +27,7 @@ export default function Banner() {
           <h2 className="text-white/90 text-lg font-normal leading-relaxed max-w-150 drop-shadow-sm">
             Search hundreds of top-rated sports facilities near you.
           </h2>
-          <div className="mt-8 w-full bg-white p-3 rounded-xl shadow-xl flex flex-col md:flex-row md:gap-2 items-center">
+          {/* <div className="mt-8 w-full bg-white p-3 rounded-xl shadow-xl flex flex-col md:flex-row md:gap-2 items-center">
             <div className="relative w-full md:w-[30%] border-b md:border-b-0 md:border-r border-[#e7f3eb]">
               <Select
                 value={"basketball"}
@@ -74,7 +74,7 @@ export default function Banner() {
                 <Icon icon={FaSearch} />
               </Button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

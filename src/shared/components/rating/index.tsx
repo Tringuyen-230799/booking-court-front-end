@@ -48,7 +48,7 @@ export default function Rating({
         <Icon
           icon={filled ? FaStar : FaRegStar}
           size={size}
-          variant={filled ? "warning" : "muted"}
+          variant={filled ? "primary" : "muted"}
         />
       </button>
     );
@@ -65,9 +65,9 @@ export default function Rating({
         {/* Half star (if needed) */}
         {hasHalfStar && (
           <div className="relative">
-            <Icon icon={FaRegStar} size={size} variant="muted" />
+            <Icon icon={FaRegStar} size={size} variant="primary" />
             <div className="absolute inset-0 overflow-hidden w-1/2">
-              <Icon icon={FaStar} size={size} variant="warning" />
+              <Icon icon={FaStar} size={size} variant="primary" />
             </div>
           </div>
         )}

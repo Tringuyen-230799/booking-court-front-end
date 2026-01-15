@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@config "../../tailwind.config.js";
 
 @theme {
   --color-primary: #11d452;
@@ -15,42 +16,42 @@
   --font-size-medium: 1rem;
   --font-size-small: 0.875rem;
   --font-size-x-small: 0.75rem;
-  
+
   --font-size-heading-sm: 1.5rem;
   --line-height-heading-sm: 2rem;
   --letter-spacing-heading-sm: -0.025em;
-  
+
   --font-size-heading-md: 2rem;
   --line-height-heading-md: 2.5rem;
   --letter-spacing-heading-md: -0.025em;
-  
+
   --font-size-heading-lg: 2.5rem;
   --line-height-heading-lg: 3rem;
   --letter-spacing-heading-lg: -0.025em;
-  
+
   --font-size-heading-xl: 3rem;
   --line-height-heading-xl: 3.5rem;
   --letter-spacing-heading-xl: -0.025em;
-  
+
   --font-size-body-sm: 0.875rem;
   --line-height-body-sm: 1.5rem;
-  
+
   --font-size-body-md: 1rem;
   --line-height-body-md: 1.75rem;
-  
+
   --font-size-body-lg: 1.125rem;
   --line-height-body-lg: 1.875rem;
-  
+
   --font-size-action-sm: 0.75rem;
   --line-height-action-sm: 1rem;
   --letter-spacing-action-sm: 0.025em;
   --font-weight-action-sm: 600;
-  
+
   --font-size-action-md: 0.875rem;
   --line-height-action-md: 1.25rem;
   --letter-spacing-action-md: 0.015em;
   --font-weight-action-md: 600;
-  
+
   --font-size-action-lg: 1rem;
   --line-height-action-lg: 1.5rem;
   --letter-spacing-action-lg: 0.015em;
@@ -62,8 +63,86 @@
   --radius-full: 9999px;
 }
 
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-spinner {
+  -moz-appearance: textfield;
+}
+
 body {
   font-family: var(--font-family-body);
   margin: 0;
   padding: 0;
+}
+
+.custom-range::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    #11d452 0%,
+    #11d452 calc(var(--progress, 0) * 1%),
+    #e5e7eb calc(var(--progress, 0) * 1%),
+    #e5e7eb 100%
+  );
+  height: 6px;
+  border-radius: 8px;
+}
+
+/* Firefox */
+.custom-range::-moz-range-progress {
+  background-color: #11d452;
+  height: 6px;
+}
+.custom-range::-moz-range-track {
+  background-color: #e5e7eb;
+  height: 6px;
+}
+
+/* IE */
+.custom-range::-ms-fill-lower {
+  background-color: #11d452;
+}
+.custom-range::-ms-fill-upper {
+  background-color: #e5e7eb;
+}
+
+
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #11d452;
+  border: 2px solid #fff;
+  box-shadow: 0 0 2px rgba(0,0,0,0.1);
+  cursor: pointer;
+  margin-top: -6px; /* Adjust to vertically center the thumb */
+  transition: background 0.2s;
+}
+
+/* Firefox */
+.custom-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #11d452;
+  border: 2px solid #fff;
+  box-shadow: 0 0 2px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* IE */
+.custom-range::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #11d452;
+  border: 2px solid #fff;
+  box-shadow: 0 0 2px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: background 0.2s;
 }

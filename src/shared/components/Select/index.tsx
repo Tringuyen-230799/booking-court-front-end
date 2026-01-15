@@ -4,7 +4,7 @@ import { FaChevronDown, FaTimes } from "react-icons/fa";
 import { IconType } from "react-icons";
 import { cn } from "shared/utils/cn";
 import Icon from "../Icon";
-import Typography from "@/components/typography";
+import Typography from "shared/components/typography";
 
 export interface SelectOption {
   value: string;

@@ -21,6 +21,13 @@ module.exports = {
         display: ["Lexend", "sans-serif"],
         body: ["Noto Sans", "sans-serif"],
       },
+      zIndex: {
+        auto: "auto",
+        'backdrop': 1000,
+        'modal': 1050,
+        'header': 1060,
+        'dropdown': 1070,
+      },
       fontSize: {
         // Existing sizes
         large: "1.125rem",
