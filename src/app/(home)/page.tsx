@@ -3,7 +3,7 @@ import Icon from "shared/components/Icon";
 import { MdOutlineSort } from "react-icons/md";
 import FilterProduct from "./container/FilterProduct";
 import CourtList from "./container/CourtList";
-import Button from "@/components/button";
+import Button from "shared/components/button";
 import { getCourts } from "../court/request";
 
 export default async function Home() {
@@ -20,24 +20,10 @@ export default async function Home() {
                 Book instantly from top-rated venues
               </p>
             </div>
-            <div className="flex gap-3">
-              <button className="lg:hidden flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
-                <span className="material-symbols-outlined text-[18px]">
-                  filter_list
-                </span>
-                Filters
-              </button>
-              <Button variant="secondary">
-                <div className="flex gap-1">
-                  <Icon icon={MdOutlineSort} size="lg" />
-                  Sort: Recommended
-                </div>
-              </Button>
-            </div>
           </div>
           <div className="flex flex-col lg:flex-row gap-8 items-start">
             <FilterProduct />
-            <CourtList courts={courts?.courts}/>
+            <CourtList courts={courts?.courts} />
           </div>
         </div>
       </section>

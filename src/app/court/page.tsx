@@ -1,4 +1,4 @@
-import Card from "@/components/card";
+import Card from "shared/components/card";
 import { getCourts } from "./request";
 
 export default async function Page() {

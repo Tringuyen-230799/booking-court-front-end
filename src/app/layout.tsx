@@ -1,7 +1,8 @@
-import Header from "@/components/header";
+import Header from "shared/components/header";
 import { NAV_LINKS } from "shared/constant/path";
 import { Lexend, Noto_Sans } from "next/font/google";
 import "./styles.css";
+import { FilterStoreProvider } from "shared/provider/FIlterCourProvidier";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -30,7 +31,7 @@ export default function RootLayout({
     <html lang="en" className={`${lexend.variable} ${notoSans.variable}`}>
       <body>
         <Header appName="Court Booker" logoUrl="Example" navLinks={NAV_LINKS} />
-        {children}
+        <FilterStoreProvider>{children}</FilterStoreProvider>
       </body>
     </html>
   );

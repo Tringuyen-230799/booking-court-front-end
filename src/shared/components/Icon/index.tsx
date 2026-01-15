@@ -1,7 +1,7 @@
 import { IconType } from 'react-icons';
 import { cn } from 'shared/utils/cn';
 
-interface IconProps {
+export interface IconProps {
   icon: IconType;
   variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'muted' | 'inherit';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';

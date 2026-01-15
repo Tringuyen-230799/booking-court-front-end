@@ -1,7 +1,7 @@
 import { HTMLAttributes, ElementType } from 'react';
 import { cn } from 'shared/utils/cn';
 
-interface TypographyProps extends HTMLAttributes<HTMLElement> {
+export interface TypographyProps extends HTMLAttributes<HTMLElement> {
   variant?: 'heading' | 'body' | 'action';
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'xs';
   color?: 'default' | 'primary' | 'primary-content' | 'muted' | 'inherit';
@@ -21,11 +21,11 @@ const getVariantStyles = (variant: 'heading' | 'body' | 'action') => {
 const getSize = (variant: 'heading' | 'body' | 'action', size: 'sm' | 'md' | 'lg' | 'xl' |'xs') => {
   const sizes = {
     heading: {
-      xs: 'text-lg leading-7 tracking-tight',        // 20px / 1.25rem
-      sm: 'text-xl leading-8 tracking-tight',        // 24px / 1.5rem
-      md: 'text-2xl leading-10 tracking-tight',       // 32px / 2rem  
-      lg: 'text-3xl leading-12 tracking-tight',       // 40px / 2.5rem
-      xl: 'text-4xl leading-14 tracking-tight'        // 48px / 3rem
+      xs: 'text-xs leading-5 tracking-tight',        // 20px / 1.25rem
+      sm: 'text-sm leading-6 tracking-tight',        // 24px / 1.5rem
+      md: 'text-md leading-8 tracking-tight',        // 32px / 2rem  
+      lg: 'text-xl leading-10 tracking-tight',       // 40px / 2.5rem
+      xl: 'text-2xl leading-[3rem] tracking-tight'   // 48px / 3rem
     },
     body: {
       xs: 'text-[12px] leading-5',                        // 14px / 0.875rem

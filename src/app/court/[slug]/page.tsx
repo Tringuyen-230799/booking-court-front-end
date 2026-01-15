@@ -1,4 +1,4 @@
-import Breadcrumb from "@/components/breadcrumb";
+import Breadcrumb from "shared/components/breadcrumb";
 import Link from "next/link";
 // import { Court } from "shared/types/court";
 
