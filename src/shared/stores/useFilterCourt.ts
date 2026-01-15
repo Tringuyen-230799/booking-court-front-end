@@ -1,23 +1,46 @@
-import { createStore } from 'zustand/vanilla'
+"use client";
+import { createStore } from "zustand/vanilla";
 
-// export type CounterState = {
- 
-// }
+interface PriceRange {
+  min: number;
+  max: number;
+}
 
-// export type CounterActions = {
+export type FilterCourState = {
+  search: string;
+  sportType: number[] | string[];
+  amenities: number[] | string[];
+  priceRange: PriceRange;
+  rating: number;
+};
 
-// }
+export type FilterCourActions = {
+  setSearch: (search: string) => void;
+  setSportType: (sportType: number[] | string[]) => void;
+  setAmenities: (amenities: number[] | string[]) => void;
+  setPriceRange: (priceRange: PriceRange) => void;
+  setRating: (rating: number) => void;
+  retsetFilters?: () => void;
+};
 
+export type FilterCourtStore = FilterCourState & FilterCourActions;
 
-// export const defaultInitState: CounterState = {
-//   count: 0,
-// }
+export const defaultInitState: FilterCourState = {
+  search: "",
+  sportType: [],
+  amenities: [],
+  priceRange: { min: 0, max: 100000 },
+  rating: 4,
+};
 
-// export const createCounterStore = (
-//   initState: CounterState = defaultInitState,
-// ) => {
-//   return createStore<CounterStore>()((set) => ({
-//     ...initState,
-
-//   }))
-// }
+export const createFilterCourtStore = () => {
+  return createStore<FilterCourtStore>()((set) => ({
+    ...defaultInitState,
+    setSearch: (search: string) => set({ search }),
+    setSportType: (sportType: number[]) => set({ sportType }),
+    setAmenities: (amenities: number[]) => set({ amenities }),
+    setPriceRange: (priceRange: PriceRange) => set({ priceRange }),
+    setRating: (rating: number) => set({ rating }),
+    retsetFilters: () => set({ ...defaultInitState }),
+  }));
+};

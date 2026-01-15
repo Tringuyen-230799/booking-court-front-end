@@ -71,7 +71,7 @@ export default function Card({ court, onClick }: CardProps) {
           </div>
           <Button
             variant="primary"
-            size="md"
+            size="sm"
             onClick={onClick ? () => onClick(String(id)) : undefined}
           >
             Book Now

@@ -5,14 +5,18 @@ import { tv } from "tailwind-variants";
 
 interface RatingOption {
   label: string;
-  value: string;
+  value: string | number;
   customLabel?: (label: string) => React.ReactNode;
 }
 
-interface GroupRadioBoxProps{
+interface GroupRadioBoxProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "size" | "onChange" | "value"
+  > {
   options: RatingOption[];
-  selectedValue: string;
-  onChange: (value: string) => void;
+  selectedValue: string | number;
+  onChange: (value: string | number) => void;
   className?: string;
   size?: "sm" | "md" | "lg";
   color?: "primary" | "secondary";
@@ -49,27 +53,30 @@ const GroupRadioBox: React.FC<GroupRadioBoxProps> = ({
   className,
   color = "primary",
   size = "md",
+  ...other
 }) => {
   return (
     <div className={cn("space-y-2.5", className)}>
       {options.map((option, index) => (
         <label
-          key={option.value + index}
+          key={option.value?.toString() + index}
           className="flex items-center gap-3 cursor-pointer group"
         >
           <input
+            {...other}
             type="radio"
             checked={selectedValue === option.value}
-            onChange={() => onChange(option.value)}
+            onChange={() => onChange(option.value?.toString())}
             className="sr-only"
-            name="name"
           />
           <span
-            className={cn(radio({
-              color,
-              size,
-              checked: selectedValue === option.value,
-            }))}
+            className={cn(
+              radio({
+                color,
+                size,
+                checked: selectedValue === option.value,
+              })
+            )}
           >
             {selectedValue === option.value && (
               <span className="w-3 h-3 rounded-full bg-primary absolute left-1/2 -translate-x-[50%]"></span>

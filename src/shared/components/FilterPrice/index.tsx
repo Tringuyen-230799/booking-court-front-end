@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { formatVND } from "shared/utils/common";
 
 interface FilterPriceProps {
   min: number;
@@ -16,28 +17,36 @@ const FilterPrice: React.FC<FilterPriceProps> = ({
   const [localMin, setLocalMin] = useState(value.min);
   const [localMax, setLocalMax] = useState(value.max);
 
+  useEffect(() => {
+    setLocalMin(value.min);
+    setLocalMax(value.max);
+  }, [value]);
+
   const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isNaN(Number(e.target.value))) {
+    const numberFormatted = e.target.value.replace(/[^0-9]/g, "");
+    if (isNaN(Number(numberFormatted))) {
       setLocalMin(min);
       return;
     }
-    const newMin = Math.max(min, Math.min(max, Number(e.target.value)));
+    const newMin = Math.max(min, Math.min(max, Number(numberFormatted)));
     setLocalMin(newMin);
     onChange({ min: newMin, max: localMax });
   };
 
   const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!Number(e.target.value)) {
+    const numberFormatted = e.target.value.replace(/[^0-9]/g, "");
+    if (!Number(numberFormatted)) {
       setLocalMax(max);
       return;
     }
-    const newMax = Math.max(min, Math.min(max, Number(e.target.value)));
+    const newMax = Math.max(min, Math.min(max, Number(numberFormatted)));
     setLocalMax(newMax);
     onChange({ min: localMin, max: newMax });
   };
 
   const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = Number(e.target.value);
+    const numberFormatted = e.target.value.replace(/[^0-9]/g, "");
+    const newValue = Number(numberFormatted);
     if (newValue < localMin) {
       setLocalMin(newValue);
       onChange({ min: newValue, max: localMax });
@@ -59,7 +68,8 @@ const FilterPrice: React.FC<FilterPriceProps> = ({
             placeholder="Min"
             type="text"
             pattern="[0-9]*"
-            value={localMin}
+            value={localMin === 0 ? localMin : formatVND(localMin)}
+            inputMode="numeric"
             onChange={handleMinChange}
           />
         </div>
@@ -73,8 +83,9 @@ const FilterPrice: React.FC<FilterPriceProps> = ({
             placeholder="Max"
             type="text"
             pattern="[0-9]*"
-            value={localMax}
+            value={localMax === 0 ? localMax : formatVND(localMax)}
             onChange={handleMaxChange}
+            inputMode="numeric"
           />
         </div>
       </div>
