@@ -12,7 +12,7 @@ export default function CourtList({ courts }: CourtListProps) {
   return (
     <div className="flex-1 w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
-      <div className="mt-12 flex justify-center flex-col items-center gap-4">
+      <div className="flex justify-center flex-col items-center gap-4">
         <List courts={courts} />
         <div className="self-start flex justify-center w-full">
           <Button

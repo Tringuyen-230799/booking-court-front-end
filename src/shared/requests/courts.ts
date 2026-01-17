@@ -1,5 +1,7 @@
+import { BACK_END_API_URL } from "shared/constant/request";
+
 export const getCourts = async () => {
-  const res = await fetch("http://localhost:8080/courts", {
+  const res = await fetch(`${BACK_END_API_URL}/courts`, {
     cache: "no-store",
   });
 
@@ -7,5 +9,5 @@ export const getCourts = async () => {
     throw new Error("Failed to fetch courts");
   }
 
-  return res.json(); // <-- return parsed data here
+  return res.json();
 };

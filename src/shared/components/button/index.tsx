@@ -19,7 +19,7 @@ const getVariantStyles = (
     secondary: "bg-white text-[#0d1b12] hover:bg-[#d5eadd] ",
     outline:
       "border-2 border-primary text-primary hover:bg-primary hover:text-[#0d1b12]",
-    link: "bg-transparent text-primary underline px-0 hover:text-[#0d1b12] shadow-none",
+    link: "bg-transparent text-primary underline px-0 hover:text-[#0d1b12] shadow-none !p-0",
   };
   return styles[variant];
 };
@@ -52,8 +52,8 @@ export default function Button({
     <button
       className={cn(
         baseStyles,
-        variantStyles,
         sizeStyles,
+        variantStyles,
         fullWidth && "w-full",
         className
       )}

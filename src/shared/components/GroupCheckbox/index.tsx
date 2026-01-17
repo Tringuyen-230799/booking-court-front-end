@@ -1,6 +1,6 @@
 import React from "react";
-import Typography from "../typography";
 import { cn } from "shared/utils/cn";
+import Checkbox from "../Checkbox";
 
 interface CheckboxOption {
   label: string;
@@ -31,11 +31,11 @@ const GroupCheckbox: React.FC<GroupCheckboxProps> = ({
     selectedValues?.map((value: string | number) => String(value))
   );
 
-  const handleChange = (value: string) => {
-    if (setValues.has(value)) {
-      setValues.delete(value);
-    } else {
+  const handleChange = (value: string, checked: boolean) => {
+    if (checked) {
       setValues.add(value);
+    } else {
+      setValues.delete(value);
     }
     onChange([...setValues]);
   };
@@ -43,32 +43,15 @@ const GroupCheckbox: React.FC<GroupCheckboxProps> = ({
   return (
     <div className={cn("space-y-2.5", className)}>
       {options.map((option, index) => (
-        <label
+        <Checkbox
           key={option.value?.toString() + index}
-          className="flex items-center gap-3 cursor-pointer group"
-        >
-          <input
-            {...other}
-            checked={setValues.has(String(option.value))}
-            className="w-4 cursor-pointer h-4 rounded border-gray-300 focus:ring-primary accent-primary bg-transparent"
-            type="checkbox"
-            onChange={() => handleChange(option.value?.toString())}
-          />
-          {option.customLabel && option.customLabel(option.label) ? (
-            option.customLabel(option.label)
-          ) : (
-            <Typography variant="action" size="sm" color="muted">
-              {option.label}
-            </Typography>
-          )}
-          {option.count !== undefined && (
-            <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
-              <Typography variant="action" size="sm" color="muted">
-                {option.count}
-              </Typography>
-            </span>
-          )}
-        </label>
+          {...other}
+          label={option.label}
+          checked={setValues.has(String(option.value))}
+          onChange={(checked) => handleChange(option.value?.toString(), checked)}
+          count={option.count}
+          customLabel={option.customLabel}
+        />
       ))}
     </div>
   );

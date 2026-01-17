@@ -2,8 +2,6 @@
 import FilterPrice from "shared/components/FilterPrice";
 import GroupCheckbox from "shared/components/GroupCheckbox";
 import GroupRadioBox from "shared/components/GroupRadioBox";
-import Icon from "shared/components/Icon";
-import { HiOutlineTicket } from "react-icons/hi";
 import Rating from "shared/components/rating";
 import Typography from "shared/components/typography";
 import Button from "shared/components/button";
@@ -25,6 +23,10 @@ export default function FilterProduct() {
     rating,
     setRating,
     retsetFilters,
+    isIndoor,
+    setIsIndoor,
+    isHalfCourt,
+    setIsHalfCourt,
   } = useCounterStore((state) => state);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,10 +34,12 @@ export default function FilterProduct() {
   };
 
   return (
-    <aside className="w-full lg:w-70 shrink-0 space-y-6 lg:sticky lg:top-24 z-30">
+    <aside className="w-full lg:w-70 shrink-0 space-y-6 z-modal sticky top-10">
       <div className="bg-white rounded-xl border border-[#e7f3eb] p-5 shadow-sm space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="font-bold text-lg">Filters</h3>
+          <Typography as="h3" variant="heading" size="xl">
+            Filters
+          </Typography>
           <Button variant="link" size="sm" onClick={retsetFilters}>
             Reset All
           </Button>
@@ -83,6 +87,44 @@ export default function FilterProduct() {
         <Divider />
         <div className="space-y-1">
           <Typography as="h4" variant="heading" size="sm" color="muted">
+            Indoor / Outdoor
+          </Typography>
+          <div className="space-y-2.5">
+            <GroupRadioBox
+              name="IndoorOutdoor"
+              options={[
+                { label: "Indoor", value: "true" },
+                { label: "Outdoor", value: "false" },
+              ]}
+              onChange={(value) => setIsIndoor(value === "true" ? true : false)}
+              selectedValue={isIndoor ? "true" : "false"}
+            />
+          </div>
+        </div>
+        <Divider />
+
+        <div className="space-y-1">
+          <Typography as="h4" variant="heading" size="sm" color="muted">
+            Half / Full Court
+          </Typography>
+          <div className="space-y-2.5">
+            <GroupRadioBox
+              name="HalfFullCourt"
+              options={[
+                { label: "Half Court", value: "true" },
+                { label: "Full Court", value: "false" },
+              ]}
+              onChange={(value) =>
+                setIsHalfCourt(value === "true" ? true : false)
+              }
+              selectedValue={isHalfCourt ? "true" : "false"}
+            />
+          </div>
+        </div>
+
+        <Divider />
+        <div className="space-y-1">
+          <Typography as="h4" variant="heading" size="sm" color="muted">
             Price Range / hr
           </Typography>
           <FilterPrice
@@ -101,8 +143,6 @@ export default function FilterProduct() {
             <GroupCheckbox
               name="Amenities"
               options={[
-                { label: "Indoor Court", value: 1 },
-                { label: "Outdoor Court", value: 2 },
                 { label: "Lighting", value: 3 },
                 {
                   label: "Equipment Rental",
@@ -118,6 +158,7 @@ export default function FilterProduct() {
             />
           </div>
         </div>
+
         <Divider />
         <div className="space-y-1">
           <Typography as="h4" variant="heading" size="sm" color="muted">
@@ -162,7 +203,7 @@ export default function FilterProduct() {
           </div>
         </div>
       </div>
-      <div className="bg-[#e7f3eb] rounded-xl p-5 text-center mt-6 hidden lg:block border border-primary/20">
+      {/* <div className="bg-[#e7f3eb] rounded-xl p-5 text-center mt-6 hidden lg:block border border-primary/20">
         <Icon icon={HiOutlineTicket} size="lg" variant="primary" />
         <h4 className="font-bold text-[#0d1b12]">Season Pass</h4>
         <p className="text-sm text-gray-500 mt-1 mb-3">
@@ -171,7 +212,7 @@ export default function FilterProduct() {
         <button className="text-sm font-bold text-primary hover:underline">
           Learn More
         </button>
-      </div>
+      </div> */}
     </aside>
   );
 }

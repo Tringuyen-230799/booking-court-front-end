@@ -1,10 +1,9 @@
 import Card from "shared/components/card";
-import { getCourts } from "./request";
+import { getCourts } from "shared/requests/courts";
 
 export default async function Page() {
   const courts = await getCourts();
 
-  console.log(courts);
   // const handleClickItem = useCallback(
   //   (id: string) => {
   //     // Convert title to slug for URL
@@ -21,9 +20,7 @@ export default async function Page() {
     <div className="flex overflow-hidden justify-center w-full items-center">
       <div className="flex gap-2 max-w-350 overflow-hidden">
         {courts.map((court) => {
-          return (
-            <Card key={court.id} onClick={() => {}} court={court} />
-          );
+          return <Card key={court.id} onClick={() => {}} court={court} />;
         })}
       </div>
     </div>

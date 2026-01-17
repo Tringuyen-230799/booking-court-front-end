@@ -1,8 +1,14 @@
-export interface Court {
+export interface CourtQueryParams {
+  search: string;
+  sportType: number[] | string[];
+  amenities: number[] | string[];
+  priceRange: { min: number; max: number };
+  rating: number;
+}
+export interface CourtResponse {
   id: string;
   name: string;
   rating: number | null;
-  onClick?: (id: string) => void;
   address: string;
   hourlyPrice: number; // Prisma Decimal serialized as string
   eventSurcharge?: number | null;
@@ -13,4 +19,8 @@ export interface Court {
   images?: { imageUrl: string }[];
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface Court extends CourtResponse {
+  onClick: (id: string) => void;
 }
