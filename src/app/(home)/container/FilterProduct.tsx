@@ -9,6 +9,7 @@ import TextField from "shared/components/TextField";
 import { FaSearch } from "react-icons/fa";
 import Divider from "shared/components/Divider";
 import { useCounterStore } from "shared/provider/FIlterCourProvidier";
+import { useFilterUrl } from "../hooks/useFilterUrl";
 
 export default function FilterProduct() {
   const {
@@ -31,7 +32,28 @@ export default function FilterProduct() {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
+    updateURL({
+      search,
+    });
   };
+
+  const { updateURL, handleResetFilters } = useFilterUrl({
+    search,
+    setSearch,
+    sportType,
+    setSportType,
+    amenities,
+    setAmenities,
+    priceRange,
+    setPriceRange,
+    rating,
+    setRating,
+    isIndoor,
+    setIsIndoor,
+    isHalfCourt,
+    setIsHalfCourt,
+    retsetFilters,
+  });
 
   return (
     <aside className="w-full lg:w-70 shrink-0 space-y-6 z-modal sticky top-10">
@@ -40,7 +62,7 @@ export default function FilterProduct() {
           <Typography as="h3" variant="heading" size="xl">
             Filters
           </Typography>
-          <Button variant="link" size="sm" onClick={retsetFilters}>
+          <Button variant="link" size="sm" onClick={handleResetFilters}>
             Reset All
           </Button>
         </div>
@@ -49,6 +71,7 @@ export default function FilterProduct() {
           size="sm"
           placeholder="Seach court"
           onChange={handleSearchChange}
+          onKeyDown={(e) => e.key === "Enter" && updateURL()}
           value={search}
           name="search"
         />
@@ -58,26 +81,29 @@ export default function FilterProduct() {
           </Typography>
           <div className="space-y-2.5">
             <GroupCheckbox
-              onChange={(values) =>
-                setSportType(values?.map((value: any) => Number(value)) || [])
-              }
+              onChange={(values) => {
+                const newSportType =
+                  values?.map((value: any) => Number(value)) || [];
+                setSportType(newSportType);
+                updateURL({ sportType: newSportType });
+              }}
               name="sport_type"
               options={[
                 {
                   label: "Tennis",
-                  value: 1,
+                  value: 11,
                 },
                 {
                   label: "Basketball",
-                  value: 2,
+                  value: 12,
                 },
                 {
                   label: "Football",
-                  value: 3,
+                  value: 13,
                 },
                 {
                   label: "Badminton",
-                  value: 4,
+                  value: 14,
                 },
               ]}
               selectedValues={sportType}
@@ -85,7 +111,7 @@ export default function FilterProduct() {
           </div>
         </div>
         <Divider />
-        <div className="space-y-1">
+        {/* <div className="space-y-1">
           <Typography as="h4" variant="heading" size="sm" color="muted">
             Indoor / Outdoor
           </Typography>
@@ -96,13 +122,17 @@ export default function FilterProduct() {
                 { label: "Indoor", value: "true" },
                 { label: "Outdoor", value: "false" },
               ]}
-              onChange={(value) => setIsIndoor(value === "true" ? true : false)}
+              onChange={(value) => {
+                const newIsIndoor = value === "true" ? true : false;
+                setIsIndoor(newIsIndoor);
+                updateURL({ isIndoor: newIsIndoor });
+              }}
               selectedValue={isIndoor ? "true" : "false"}
             />
           </div>
         </div>
-        <Divider />
-
+        <Divider /> */}
+{/* 
         <div className="space-y-1">
           <Typography as="h4" variant="heading" size="sm" color="muted">
             Half / Full Court
@@ -114,15 +144,17 @@ export default function FilterProduct() {
                 { label: "Half Court", value: "true" },
                 { label: "Full Court", value: "false" },
               ]}
-              onChange={(value) =>
-                setIsHalfCourt(value === "true" ? true : false)
-              }
+              onChange={(value) => {
+                const newIsHalfCourt = value === "true" ? true : false;
+                setIsHalfCourt(newIsHalfCourt);
+                updateURL({ isHalfCourt: newIsHalfCourt });
+              }}
               selectedValue={isHalfCourt ? "true" : "false"}
             />
           </div>
         </div>
 
-        <Divider />
+        <Divider /> */}
         <div className="space-y-1">
           <Typography as="h4" variant="heading" size="sm" color="muted">
             Price Range / hr
@@ -130,7 +162,10 @@ export default function FilterProduct() {
           <FilterPrice
             min={10}
             max={1000000}
-            onChange={setPriceRange}
+            onChange={(newPriceRange) => {
+              setPriceRange(newPriceRange);
+              updateURL({ priceRange: newPriceRange });
+            }}
             value={priceRange}
           />
         </div>
@@ -143,17 +178,20 @@ export default function FilterProduct() {
             <GroupCheckbox
               name="Amenities"
               options={[
-                { label: "Lighting", value: 3 },
+                { label: "Lighting", value: 13 },
                 {
                   label: "Equipment Rental",
-                  value: 4,
+                  value: 14,
                 },
-                { label: "Parking", value: 5 },
-                { label: "Showers", value: 6 },
+                { label: "Parking", value: 15 },
+                { label: "Showers", value: 16 },
               ]}
-              onChange={(values) =>
-                setAmenities(values?.map((value: any) => Number(value)) || [])
-              }
+              onChange={(values) => {
+                const newAmenities =
+                  values?.map((value: any) => Number(value)) || [];
+                setAmenities(newAmenities);
+                updateURL({ amenities: newAmenities });
+              }}
               selectedValues={amenities}
             />
           </div>
@@ -168,7 +206,11 @@ export default function FilterProduct() {
             <GroupRadioBox
               className="space-y-3"
               name="Rating"
-              onChange={(value) => setRating(Number(value))}
+              onChange={(value) => {
+                const newRating = Number(value);
+                setRating(newRating);
+                updateURL({ rating: newRating });
+              }}
               options={[
                 {
                   customLabel: (label) => (

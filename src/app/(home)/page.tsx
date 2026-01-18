@@ -2,9 +2,28 @@ import Banner from "./container/Banner";
 import FilterProduct from "./container/FilterProduct";
 import CourtList from "./container/CourtList";
 import { getCourts } from "shared/requests/courts";
+import { getFiltersFromSearchParams } from "./hooks/useFiltersFromSearchParams";
 
-export default async function Home() {
-  const courts = await getCourts();
+interface HomeProps {
+  searchParams: Promise<{
+    search?: string;
+    sportType?: string | string[];
+    amenities?: string | string[];
+    minPrice?: string;
+    maxPrice?: string;
+    rating?: string;
+    isIndoor?: string;
+    isHalfCourt?: string;
+  }>;
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const resolvedSearchParams = await searchParams;
+
+  const { filters, hasFilters } =
+    getFiltersFromSearchParams(resolvedSearchParams);
+
+  const courts = await getCourts(hasFilters ? filters : undefined);
 
   return (
     <main>

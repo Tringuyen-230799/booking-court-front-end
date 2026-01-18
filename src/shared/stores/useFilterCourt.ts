@@ -12,8 +12,8 @@ export type FilterCourState = {
   amenities: number[] | string[];
   priceRange: PriceRange;
   rating: number;
-  isIndoor?: boolean;
-  isHalfCourt?: boolean;
+  isIndoor: boolean;
+  isHalfCourt: boolean;
 };
 
 export type FilterCourActions = {
