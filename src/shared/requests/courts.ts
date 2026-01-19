@@ -1,9 +1,7 @@
-import { FilterCourState } from "shared/stores/useFilterCourt";
+import { CourtQueryParams } from "shared/types/court";
 import { request } from "shared/utils/request";
 
-type CourtsFilters = Partial<FilterCourState>;
-
-export const getCourts = async (filters?: CourtsFilters) => {
+export const getCourts = async (filters?: CourtQueryParams) => {
   // Convert filters to params object
   const params: Record<string, any> = {};
 
@@ -39,16 +37,14 @@ export const getCourts = async (filters?: CourtsFilters) => {
     }
 
     // Add boolean filters
-    if (filters.isIndoor !== undefined) {
-      params.isIndoor = filters.isIndoor;
-    }
+    // if (filters.isIndoor !== undefined) {
+    //   params.isIndoor = filters.isIndoor;
+    // }
 
-    if (filters.isHalfCourt !== undefined) {
-      params.isHalfCourt = filters.isHalfCourt;
-    }
+    // if (filters.isHalfCourt !== undefined) {
+    //   params.isHalfCourt = filters.isHalfCourt;
+    // }
   }
 
-  console.log("params ", params);
-
-  return request.get("/courts", { params });
+  return await request.get("/courts", { params });
 };

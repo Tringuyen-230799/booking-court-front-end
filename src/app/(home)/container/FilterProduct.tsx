@@ -9,7 +9,6 @@ import TextField from "shared/components/TextField";
 import { FaSearch } from "react-icons/fa";
 import Divider from "shared/components/Divider";
 import { useCounterStore } from "shared/provider/FIlterCourProvidier";
-import { useFilterUrl } from "../hooks/useFilterUrl";
 
 export default function FilterProduct() {
   const {
@@ -24,36 +23,12 @@ export default function FilterProduct() {
     rating,
     setRating,
     retsetFilters,
-    isIndoor,
-    setIsIndoor,
-    isHalfCourt,
-    setIsHalfCourt,
   } = useCounterStore((state) => state);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Update once with the latest input value
     setSearch(e.target.value);
-    updateURL({
-      search,
-    });
   };
-
-  const { updateURL, handleResetFilters } = useFilterUrl({
-    search,
-    setSearch,
-    sportType,
-    setSportType,
-    amenities,
-    setAmenities,
-    priceRange,
-    setPriceRange,
-    rating,
-    setRating,
-    isIndoor,
-    setIsIndoor,
-    isHalfCourt,
-    setIsHalfCourt,
-    retsetFilters,
-  });
 
   return (
     <aside className="w-full lg:w-70 shrink-0 space-y-6 z-modal sticky top-10">
@@ -62,7 +37,7 @@ export default function FilterProduct() {
           <Typography as="h3" variant="heading" size="xl">
             Filters
           </Typography>
-          <Button variant="link" size="sm" onClick={handleResetFilters}>
+          <Button variant="link" size="sm" onClick={retsetFilters}>
             Reset All
           </Button>
         </div>
@@ -71,7 +46,6 @@ export default function FilterProduct() {
           size="sm"
           placeholder="Seach court"
           onChange={handleSearchChange}
-          onKeyDown={(e) => e.key === "Enter" && updateURL()}
           value={search}
           name="search"
         />
@@ -85,7 +59,6 @@ export default function FilterProduct() {
                 const newSportType =
                   values?.map((value: any) => Number(value)) || [];
                 setSportType(newSportType);
-                updateURL({ sportType: newSportType });
               }}
               name="sport_type"
               options={[
@@ -132,7 +105,7 @@ export default function FilterProduct() {
           </div>
         </div>
         <Divider /> */}
-{/* 
+        {/* 
         <div className="space-y-1">
           <Typography as="h4" variant="heading" size="sm" color="muted">
             Half / Full Court
@@ -164,7 +137,6 @@ export default function FilterProduct() {
             max={1000000}
             onChange={(newPriceRange) => {
               setPriceRange(newPriceRange);
-              updateURL({ priceRange: newPriceRange });
             }}
             value={priceRange}
           />
@@ -190,7 +162,6 @@ export default function FilterProduct() {
                 const newAmenities =
                   values?.map((value: any) => Number(value)) || [];
                 setAmenities(newAmenities);
-                updateURL({ amenities: newAmenities });
               }}
               selectedValues={amenities}
             />
@@ -209,7 +180,6 @@ export default function FilterProduct() {
               onChange={(value) => {
                 const newRating = Number(value);
                 setRating(newRating);
-                updateURL({ rating: newRating });
               }}
               options={[
                 {
@@ -245,16 +215,6 @@ export default function FilterProduct() {
           </div>
         </div>
       </div>
-      {/* <div className="bg-[#e7f3eb] rounded-xl p-5 text-center mt-6 hidden lg:block border border-primary/20">
-        <Icon icon={HiOutlineTicket} size="lg" variant="primary" />
-        <h4 className="font-bold text-[#0d1b12]">Season Pass</h4>
-        <p className="text-sm text-gray-500 mt-1 mb-3">
-          Get unlimited bookings with a monthly pass starting at $99.
-        </p>
-        <button className="text-sm font-bold text-primary hover:underline">
-          Learn More
-        </button>
-      </div> */}
     </aside>
   );
 }
