@@ -24,7 +24,7 @@ export default function Header({
     : PATH.HOME;
 
   return (
-    <header className="flex items-center justify-between whitespace-nowrap px-4 md:px-10 py-3  bg-white sticky z-header top-0 ">
+    <header className="flex items-center justify-between whitespace-nowrap px-4 md:px-10 py-3 bg-white">
       <div className="flex items-center gap-2">
         <div className="text-primary">
           <Icon icon={FaBasketballBall} variant="primary"/>

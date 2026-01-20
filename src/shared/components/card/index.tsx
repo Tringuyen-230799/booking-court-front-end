@@ -44,10 +44,21 @@ export default function Card({ court, onClick }: CardProps) {
       </div>
       <div className="p-5 flex flex-col flex-1 gap-2">
         <div className="w-full">
-          <Badge variant="primary" size="xs">
-            {categories?.[0]?.name}
-          </Badge>
-          <Typography as='h3' className="truncate" variant="heading" size="lg">
+          {categories?.length && categories?.length > 1 ? (
+            <div className="flex items-center gap-1">
+              <Badge variant="primary" size="xs">
+                {categories?.[0]?.name}
+              </Badge>
+              <Badge variant="primary" size="xs">
+                +{categories?.length && categories?.length - 1}
+              </Badge>
+            </div>
+          ) : (
+            <Badge variant="primary" size="xs">
+              {categories?.[0]?.name}
+            </Badge>
+          )}
+          <Typography as="h3" className="truncate" variant="heading" size="lg">
             {name}
           </Typography>
         </div>
