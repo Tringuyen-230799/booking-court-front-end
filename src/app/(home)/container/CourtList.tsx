@@ -5,28 +5,34 @@ import Card from "shared/components/card";
 import Button from "shared/components/button";
 import { useCounterStore } from "shared/provider/FIlterCourProvidier";
 import useGetCourtList from "../hooks/useGetCourtList";
+import LoadingMore from "shared/components/LoadingMore";
 
 export default function CourtList() {
   const { search, sportType, amenities, priceRange, rating } = useCounterStore(
     (state) => state,
   );
 
-  const { data, isLoading, isFetching } = useGetCourtList({
+  const { data, isLoading, isFetching, fetchNextPage } = useGetCourtList({
     search,
     sportType,
     amenities,
     min: priceRange?.min || 0,
     max: priceRange?.max || 0,
     rating,
-    page: 1,
     limit: 25,
   });
 
-  console.log(data)
+  const courts = data?.pages.flatMap((page) => page.data?.contents);
+  const total = data?.pages[0]?.data?.totalCount || 0;
 
-  const courts = data?.contents;
+  const isStillHaveMore = courts && courts.length < total;
 
-  if (isLoading || isFetching) {
+  const handleLoadMore = () => {
+    if (isLoading || isFetching) return;
+    fetchNextPage();
+  };
+
+  if (isLoading) {
     return <CourtSkeleton />;
   }
 
@@ -35,19 +41,22 @@ export default function CourtList() {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
       <div className="flex justify-center flex-col items-center gap-4">
         <List courts={courts || []} />
-        <div className="self-start flex justify-center w-full mt-6">
-          <Button
-            variant="secondary"
-            className="rounded-full"
-            size="lg"
-            onClick={() => {}}
-          >
-            <div className="flex gap-1 items-center">
-              Load More Courts
-              <Icon icon={IoIosArrowDown} size="sm" />
-            </div>
-          </Button>
-        </div>
+        {!isFetching && isStillHaveMore && (
+          <div className="self-start flex justify-center w-full mt-6">
+            <Button
+              variant="secondary"
+              className="rounded-full"
+              size="lg"
+              onClick={() => handleLoadMore()}
+            >
+              <div className="flex gap-1 items-center">
+                Load More Courts
+                <Icon icon={IoIosArrowDown} size="sm" />
+              </div>
+            </Button>
+          </div>
+        )}
+        {isFetching && <LoadingMore />}
       </div>
     </div>
   );

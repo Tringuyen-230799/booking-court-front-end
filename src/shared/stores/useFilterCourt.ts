@@ -12,8 +12,6 @@ export type FilterCourState = {
   amenities: number[] | string[];
   priceRange: PriceRange;
   rating: number;
-  isIndoor: boolean;
-  isHalfCourt: boolean;
 };
 
 export type FilterCourActions = {
@@ -22,9 +20,7 @@ export type FilterCourActions = {
   setAmenities: (amenities: number[] | string[]) => void;
   setPriceRange: (priceRange: PriceRange) => void;
   setRating: (rating: number) => void;
-  retsetFilters?: () => void;
-  setIsIndoor: (isIndoor: boolean) => void;
-  setIsHalfCourt: (isHalfCourt: boolean) => void;
+  resetFilters: () => void;
 };
 
 export type FilterCourtStore = FilterCourState & FilterCourActions;
@@ -35,8 +31,6 @@ export const defaultInitState: FilterCourState = {
   amenities: [],
   priceRange: { min: 0, max: 100000 },
   rating: 4,
-  isIndoor: true,
-  isHalfCourt: false,
 };
 
 export const createFilterCourtStore = () => {
@@ -47,8 +41,8 @@ export const createFilterCourtStore = () => {
     setAmenities: (amenities: number[]) => set({ amenities }),
     setPriceRange: (priceRange: PriceRange) => set({ priceRange }),
     setRating: (rating: number) => set({ rating }),
-    retsetFilters: () => set({ ...defaultInitState }),
-    setIsIndoor: (isIndoor: boolean) => set({ isIndoor }),
-    setIsHalfCourt: (isHalfCourt: boolean) => set({ isHalfCourt }),
+    resetFilters: () => {
+      set({ ...defaultInitState });
+    },
   }));
 };
