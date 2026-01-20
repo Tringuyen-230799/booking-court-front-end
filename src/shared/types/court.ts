@@ -2,8 +2,11 @@ export interface CourtQueryParams {
   search: string;
   sportType: number[] | string[];
   amenities: number[] | string[];
-  priceRange: { min: number; max: number };
+  min: number;
+  max: number;
   rating: number;
+  page?: number;
+  limit?: number;
 }
 export interface CourtResponse {
   id: string;

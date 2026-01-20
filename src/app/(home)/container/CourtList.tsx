@@ -11,13 +11,20 @@ export default function CourtList() {
     (state) => state,
   );
 
-  const { courts, isLoading, isFetching } = useGetCourtList({
+  const { data, isLoading, isFetching } = useGetCourtList({
     search,
     sportType,
     amenities,
-    priceRange,
+    min: priceRange?.min || 0,
+    max: priceRange?.max || 0,
     rating,
+    page: 1,
+    limit: 25,
   });
+
+  console.log(data)
+
+  const courts = data?.contents;
 
   if (isLoading || isFetching) {
     return <CourtSkeleton />;

@@ -10,7 +10,15 @@ import { FaSearch } from "react-icons/fa";
 import Divider from "shared/components/Divider";
 import { useCounterStore } from "shared/provider/FIlterCourProvidier";
 
-export default function FilterProduct() {
+interface FilterProductProps {
+  categories?: Array<{ id: number; name: string }>;
+  amenitiesData?: Array<{ id: number; name: string }>;
+}
+
+export default function FilterProduct({
+  categories = [],
+  amenitiesData = [],
+}: FilterProductProps) {
   const {
     search,
     setSearch,
@@ -61,24 +69,10 @@ export default function FilterProduct() {
                 setSportType(newSportType);
               }}
               name="sport_type"
-              options={[
-                {
-                  label: "Tennis",
-                  value: 11,
-                },
-                {
-                  label: "Basketball",
-                  value: 12,
-                },
-                {
-                  label: "Football",
-                  value: 13,
-                },
-                {
-                  label: "Badminton",
-                  value: 14,
-                },
-              ]}
+              options={categories.map((category) => ({
+                label: category.name,
+                value: category.id,
+              }))}
               selectedValues={sportType}
             />
           </div>
@@ -149,15 +143,10 @@ export default function FilterProduct() {
           <div className="space-y-2.5">
             <GroupCheckbox
               name="Amenities"
-              options={[
-                { label: "Lighting", value: 13 },
-                {
-                  label: "Equipment Rental",
-                  value: 14,
-                },
-                { label: "Parking", value: 15 },
-                { label: "Showers", value: 16 },
-              ]}
+              options={amenitiesData.map((amenity) => ({
+                label: amenity.name,
+                value: amenity.id,
+              }))}
               onChange={(values) => {
                 const newAmenities =
                   values?.map((value: any) => Number(value)) || [];

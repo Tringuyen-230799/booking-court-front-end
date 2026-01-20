@@ -10,7 +10,7 @@ const useGetCourtList = (param: CourtQueryParams) => {
   });
 
   return {
-    courts: data?.courts,
+    data: data?.data,
     isLoading,
     isFetching,
   };
