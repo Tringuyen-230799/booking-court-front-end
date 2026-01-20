@@ -9,6 +9,8 @@ import TextField from "shared/components/TextField";
 import { FaSearch } from "react-icons/fa";
 import Divider from "shared/components/Divider";
 import { useCounterStore } from "shared/provider/FIlterCourProvidier";
+import { useCallback, useRef, useState } from "react";
+import { debounce } from "lodash";
 
 interface FilterProductProps {
   categories?: Array<{ id: number; name: string }>;
@@ -30,14 +32,65 @@ export default function FilterProduct({
     setPriceRange,
     rating,
     setRating,
-    retsetFilters,
+    resetFilters,
   } = useCounterStore((state) => state);
+  const [interalsearch, setInteralsearch] = useState(search);
+  const [internalPrice, setInternalPrice] = useState<{
+    min: number;
+    max: number;
+  }>(priceRange);
+  const [internalSportType, setInternalSportType] = useState<
+    number[] | string[]
+  >(sportType);
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Update once with the latest input value
-    setSearch(e.target.value);
-  };
+  const debounceSearch = useRef(
+    debounce((value: string) => {
+      setSearch(value);
+    }, 1000),
+  ).current;
 
+  const debouncePrice = useRef(
+    debounce((value: { min: number; max: number }) => {
+      setPriceRange(value);
+    }, 1000),
+  ).current;
+
+  const debounceSpotType = useRef(
+    debounce((value: number[]) => {
+      setSportType(value);
+    }, 1000),
+  ).current;
+  
+  const handleSearchChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInteralsearch(e.target.value);
+      debounceSearch(e.target.value);
+    },
+    [debounceSearch],
+  );
+
+  const handleChangePrice = useCallback(
+    (price: { min: number; max: number }) => {
+      setInternalPrice(price);
+      debouncePrice(price);
+    },
+    [debouncePrice],
+  );
+
+  const handeleSportTypeChange = useCallback(
+    (values: number[] | string[]) => {
+      setInternalSportType(values);
+      debounceSpotType(values.map((value: string | number) => Number(value)));
+    },
+    [debounceSpotType],
+  );
+
+  const handleResetFilters = useCallback(() => {
+    resetFilters();
+    setInteralsearch(search);
+    setInternalPrice(priceRange);
+    setInternalSportType(sportType);
+  }, [resetFilters, search, priceRange, sportType]);
   return (
     <aside className="w-full lg:w-70 shrink-0 space-y-6 z-modal sticky top-10">
       <div className="bg-white rounded-xl border border-[#e7f3eb] p-5 shadow-sm space-y-4">
@@ -45,7 +98,7 @@ export default function FilterProduct({
           <Typography as="h3" variant="heading" size="xl">
             Filters
           </Typography>
-          <Button variant="link" size="sm" onClick={retsetFilters}>
+          <Button variant="link" size="sm" onClick={handleResetFilters}>
             Reset All
           </Button>
         </div>
@@ -54,7 +107,7 @@ export default function FilterProduct({
           size="sm"
           placeholder="Seach court"
           onChange={handleSearchChange}
-          value={search}
+          value={interalsearch}
           name="search"
         />
         <div className="space-y-1">
@@ -63,65 +116,17 @@ export default function FilterProduct({
           </Typography>
           <div className="space-y-2.5">
             <GroupCheckbox
-              onChange={(values) => {
-                const newSportType =
-                  values?.map((value: any) => Number(value)) || [];
-                setSportType(newSportType);
-              }}
+              onChange={handeleSportTypeChange}
               name="sport_type"
               options={categories.map((category) => ({
                 label: category.name,
                 value: category.id,
               }))}
-              selectedValues={sportType}
+              selectedValues={internalSportType}
             />
           </div>
         </div>
         <Divider />
-        {/* <div className="space-y-1">
-          <Typography as="h4" variant="heading" size="sm" color="muted">
-            Indoor / Outdoor
-          </Typography>
-          <div className="space-y-2.5">
-            <GroupRadioBox
-              name="IndoorOutdoor"
-              options={[
-                { label: "Indoor", value: "true" },
-                { label: "Outdoor", value: "false" },
-              ]}
-              onChange={(value) => {
-                const newIsIndoor = value === "true" ? true : false;
-                setIsIndoor(newIsIndoor);
-                updateURL({ isIndoor: newIsIndoor });
-              }}
-              selectedValue={isIndoor ? "true" : "false"}
-            />
-          </div>
-        </div>
-        <Divider /> */}
-        {/* 
-        <div className="space-y-1">
-          <Typography as="h4" variant="heading" size="sm" color="muted">
-            Half / Full Court
-          </Typography>
-          <div className="space-y-2.5">
-            <GroupRadioBox
-              name="HalfFullCourt"
-              options={[
-                { label: "Half Court", value: "true" },
-                { label: "Full Court", value: "false" },
-              ]}
-              onChange={(value) => {
-                const newIsHalfCourt = value === "true" ? true : false;
-                setIsHalfCourt(newIsHalfCourt);
-                updateURL({ isHalfCourt: newIsHalfCourt });
-              }}
-              selectedValue={isHalfCourt ? "true" : "false"}
-            />
-          </div>
-        </div>
-
-        <Divider /> */}
         <div className="space-y-1">
           <Typography as="h4" variant="heading" size="sm" color="muted">
             Price Range / hr
@@ -129,10 +134,8 @@ export default function FilterProduct({
           <FilterPrice
             min={10}
             max={1000000}
-            onChange={(newPriceRange) => {
-              setPriceRange(newPriceRange);
-            }}
-            value={priceRange}
+            onChange={handleChangePrice}
+            value={internalPrice}
           />
         </div>
         <Divider />
