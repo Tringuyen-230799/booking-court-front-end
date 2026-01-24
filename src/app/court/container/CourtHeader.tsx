@@ -4,13 +4,27 @@ import Icon from "shared/components/Icon";
 import Badge from "shared/components/badge";
 import { FaStar } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { CourtResponse } from "shared/types/court";
 
-const CourtHeader = () => {
+interface CourtHeaderProps {
+  court: Omit<
+    CourtResponse,
+    | "description"
+    | "categories"
+    | "facilities"
+    | "images"
+    | "createdAt"
+    | "updatedAt"
+  >;
+}
+
+const CourtHeader = ({ court }: CourtHeaderProps) => {
+  const { name, rating, address, isIndoor } = court;
   return (
     <>
       <div className="flex-1 w-full flex justify-between">
         <Typography as="h1" variant="heading" size="xl">
-          Downtown Hoop District - Court A
+          {name}
         </Typography>
         <CourtDetailBtn />
       </div>
@@ -19,7 +33,7 @@ const CourtHeader = () => {
         <div className="flex items-center gap-1 text-yellow-500">
           <Icon icon={FaStar} size="xs" />
           <Typography as="span" variant="action" size="md">
-            4.9
+            {rating?.toFixed(1) || "N/A"}
           </Typography>
           <Typography as="span" variant="action" size="sm" color="muted">
             (128 reviews)
@@ -29,14 +43,14 @@ const CourtHeader = () => {
         <div className="flex items-center gap-1">
           <Icon icon={FaMapMarkerAlt} size="xs" variant="muted" />
           <Typography variant="action" size="sm" color="default">
-            123 Sport Ave, Metro City
+            {address}
           </Typography>
         </div>
         <span className="hidden sm:inline">•</span>
 
         <div className="flex gap-6 items-center">
           <Typography variant="action" size="sm" color="default">
-            Indoor
+            {isIndoor ? "Indoor" : "Outdoor"}
           </Typography>
 
           <Badge variant="success" size="xs">
@@ -47,6 +61,5 @@ const CourtHeader = () => {
     </>
   );
 };
-
 
 export default CourtHeader;

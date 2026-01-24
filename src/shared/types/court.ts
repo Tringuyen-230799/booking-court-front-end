@@ -22,6 +22,7 @@ export interface CourtResponse {
   images?: { imageUrl: string }[];
   createdAt: Date;
   updatedAt: Date;
+  description?: string | null;
 }
 
 export interface Court extends CourtResponse {
