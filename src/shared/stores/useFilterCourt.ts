@@ -8,7 +8,7 @@ interface PriceRange {
 
 export type FilterCourState = {
   search: string;
-  sportType: number[] | string[];
+  sportTypes: number[] | string[];
   amenities: number[] | string[];
   priceRange: PriceRange;
   rating: number;
@@ -27,7 +27,7 @@ export type FilterCourtStore = FilterCourState & FilterCourActions;
 
 export const defaultInitState: FilterCourState = {
   search: "",
-  sportType: [],
+  sportTypes: [],
   amenities: [],
   priceRange: { min: 0, max: 100000 },
   rating: 4,
@@ -37,7 +37,7 @@ export const createFilterCourtStore = () => {
   return createStore<FilterCourtStore>()((set) => ({
     ...defaultInitState,
     setSearch: (search: string) => set({ search }),
-    setSportType: (sportType: number[]) => set({ sportType }),
+    setSportType: (sportTypes: number[]) => set({ sportTypes }),
     setAmenities: (amenities: number[]) => set({ amenities }),
     setPriceRange: (priceRange: PriceRange) => set({ priceRange }),
     setRating: (rating: number) => set({ rating }),

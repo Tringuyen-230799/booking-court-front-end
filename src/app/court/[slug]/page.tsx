@@ -18,7 +18,7 @@ export default async function CourtDetail({ params }: PageProps) {
 
   const court = await getCourtDetails(slug);
 
-  const { description, facilities } = court;
+  const { description, facilities } = court || {};
   const amenities = facilities?.map((facility) => facility?.name) || [];
 
   if (!court) {
@@ -45,24 +45,22 @@ export default async function CourtDetail({ params }: PageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 relative">
           <div className="lg:col-span-2">
-            {description && (
-              <section className="w-full">
-                <Typography as="h2" variant="heading" size="xl">
-                  About this court
+            <section className="w-full">
+              <Typography as="h2" variant="heading" size="xl">
+                About this court
+              </Typography>
+              <div className="">
+                <Typography
+                  variant="body"
+                  as="p"
+                  className="mb-4"
+                  size="md"
+                  color={description ? "default" : "muted"}
+                >
+                  {description || 'No description available for this court.'}
                 </Typography>
-                <div className="">
-                  <Typography
-                    variant="body"
-                    as="p"
-                    className="mb-4"
-                    size="md"
-                    color="default"
-                  >
-                    {description}
-                  </Typography>
-                </div>
-              </section>
-            )}
+              </div>
+            </section>
             <Divider className="mt-5 mb-4" />
             <CourtAmenities amentites={amenities} />
             <Divider className="my-7" />

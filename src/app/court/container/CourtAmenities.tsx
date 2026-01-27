@@ -22,7 +22,7 @@ const CourtAmenities = ({ amentites }: { amentites: string[] }) => {
 
   const amentitesIconMap: Record<string, IconType> = {
     "Free WiFi": FaWifi,
-    "Air Conditioning": FaSnowflake,
+    "Air Conditioning": FaRulerCombined,
   };
 
   const options = amentites.map((amenity) => ({

@@ -1,6 +1,6 @@
 export interface CourtQueryParams {
   search: string;
-  sportType: number[] | string[];
+  sportTypes: number[] | string[];
   amenities: number[] | string[];
   min: number;
   max: number;

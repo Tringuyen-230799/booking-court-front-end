@@ -14,6 +14,5 @@ export const getCourtAmentites = async () => {
 };
 
 export const getCourtDetails = async (slug: string): Promise<CourtResponse> => {
-  const data = await request.get(`/courts/${slug}`);
-  return data.court;
+  return await request.get(`/courts/${slug}`);
 };

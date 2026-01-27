@@ -15,7 +15,7 @@ class RequestClient {
     if (!baseURL) {
       // Provide a clear error for missing env configuration
       console.warn(
-        "[RequestClient] Missing BACK_END_API_URL. Set NEXT_PUBLIC_BACKEND_URL in .env.local."
+        "[RequestClient] Missing BACK_END_API_URL. Set NEXT_PUBLIC_BACKEND_URL in .env.local.",
       );
     }
     this.baseURL = baseURL;
@@ -25,7 +25,7 @@ class RequestClient {
     try {
       if (!this.baseURL) {
         throw new Error(
-          "Base URL is not configured. Ensure NEXT_PUBLIC_BACKEND_URL is set."
+          "Base URL is not configured. Ensure NEXT_PUBLIC_BACKEND_URL is set.",
         );
       }
       const url = new URL(path, this.baseURL);
@@ -33,7 +33,9 @@ class RequestClient {
       if (params) {
         Object.entries(params).forEach(([key, value]) => {
           if (Array.isArray(value)) {
-            value.forEach((item) => url.searchParams.append(key, item));
+            if (value.length > 0) {
+              url.searchParams.append(key, value.join(","));
+            }
           } else if (value !== undefined && value !== null) {
             url.searchParams.append(key, value);
           }
@@ -55,7 +57,6 @@ class RequestClient {
       ...otherOptions
     } = options;
 
-
     const url = this.buildURL(path, params);
 
     const response = await fetch(url, {
@@ -72,7 +73,7 @@ class RequestClient {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    return response.json();
+    return response.json().then((res) => res?.data);
   }
 
   async post(path: string, options: RequestOptions = {}) {

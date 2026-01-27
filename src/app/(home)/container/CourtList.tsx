@@ -9,14 +9,14 @@ import LoadingMore from "shared/components/LoadingMore";
 import { useRouter } from "next/navigation";
 
 export default function CourtList() {
-  const { search, sportType, amenities, priceRange, rating } = useCounterStore(
+  const { search, sportTypes, amenities, priceRange, rating } = useCounterStore(
     (state) => state,
   );
   const router = useRouter();
 
   const { data, isLoading, isFetching, fetchNextPage } = useGetCourtList({
     search,
-    sportType,
+    sportTypes,
     amenities,
     min: priceRange?.min || 0,
     max: priceRange?.max || 0,
@@ -25,6 +25,8 @@ export default function CourtList() {
   });
 
   const courts = data?.pages.flatMap((page) => page.data?.contents);
+
+  console.log("CourtList Rendered", courts);
   const total = data?.pages[0]?.data?.totalCount || 0;
 
   const isStillHaveMore = courts && courts.length < total;
