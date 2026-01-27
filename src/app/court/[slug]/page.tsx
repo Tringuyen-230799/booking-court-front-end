@@ -33,7 +33,7 @@ export default async function CourtDetail({ params }: PageProps) {
             { label: "Home", href: "/" },
             { label: "Courts", href: "/court" },
             { label: court.name, isCurrentPage: true },
-          ]}
+          ]} 
         />
 
         <CourtHeader court={court} />

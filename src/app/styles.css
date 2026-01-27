@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
+@utility skeleton-block {
+  background-color: rgb(229 229 229);
+  animation: var(--animate-pulse-slow);
+  border-radius: var(--radius);
+}
+
 @theme {
   --color-primary: #11d452;
   --color-background-light: #f6f8f6;
@@ -61,6 +67,8 @@
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-full: 9999px;
+
+  --animate-pulse-slow: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .no-spinner::-webkit-outer-spin-button,
@@ -108,7 +116,6 @@ body {
   background-color: #e5e7eb;
 }
 
-
 .custom-range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -117,7 +124,7 @@ body {
   border-radius: 50%;
   background: #11d452;
   border: 2px solid #fff;
-  box-shadow: 0 0 2px rgba(0,0,0,0.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   margin-top: -6px; /* Adjust to vertically center the thumb */
   transition: background 0.2s;
@@ -130,7 +137,7 @@ body {
   border-radius: 50%;
   background: #11d452;
   border: 2px solid #fff;
-  box-shadow: 0 0 2px rgba(0,0,0,0.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: background 0.2s;
 }
@@ -142,7 +149,7 @@ body {
   border-radius: 50%;
   background: #11d452;
   border: 2px solid #fff;
-  box-shadow: 0 0 2px rgba(0,0,0,0.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: background 0.2s;
 }
