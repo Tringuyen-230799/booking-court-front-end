@@ -13,7 +13,7 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   return (
-    <nav aria-label="Breadcrumb" className={`flex mb-6 ${className}`.trim()}>
+    <nav aria-label="Breadcrumb" className={`flex ${className}`.trim()}>
       <ol className="flex items-center space-x-2">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
@@ -43,7 +43,7 @@ export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
 
               {/* Separator */}
               {!isLast && (
-                <span className="text-neutral-400 text-sm ml-2 mr-2">/</span>
+                <span className="text-neutral-400 text-sm ml-2">/</span>
               )}
             </li>
           );

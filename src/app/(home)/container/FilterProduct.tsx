@@ -24,7 +24,7 @@ export default function FilterProduct({
   const {
     search,
     setSearch,
-    sportType,
+    sportTypes,
     setSportType,
     setAmenities,
     amenities,
@@ -41,7 +41,7 @@ export default function FilterProduct({
   }>(priceRange);
   const [internalSportType, setInternalSportType] = useState<
     number[] | string[]
-  >(sportType);
+  >(sportTypes);
 
   const debounceSearch = useRef(
     debounce((value: string) => {
@@ -89,8 +89,8 @@ export default function FilterProduct({
     resetFilters();
     setInteralsearch(search);
     setInternalPrice(priceRange);
-    setInternalSportType(sportType);
-  }, [resetFilters, search, priceRange, sportType]);
+    setInternalSportType(sportTypes);
+  }, [resetFilters, search, priceRange, sportTypes]);
   return (
     <aside className="w-full lg:w-70 shrink-0 space-y-6 z-modal sticky top-10">
       <div className="bg-white rounded-xl border border-[#e7f3eb] p-5 shadow-sm space-y-4">

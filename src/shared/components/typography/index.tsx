@@ -53,7 +53,7 @@ const getColorStyles = (
   color: "default" | "primary" | "primary-content" | "muted" | "inherit"
 ) => {
   const colors = {
-    default: "text-gray-900",
+    default: "text-gray-[#525252]",
     primary: "text-primary",
     "primary-content": "text-[#052e12]", // Using your --color-primary-content
     muted: "text-gray-500",

@@ -16,7 +16,10 @@ const useGetCourtList = (params: CourtQueryParams) => {
       return lastPage?.data?.currentPage + 1;
     },
     initialPageParam: 1,
+    retry: false,
   });
+
+  console.log("useGetCourtList Rendered", data);
 
   return {
     data: data,

@@ -6,15 +6,17 @@ import Button from "shared/components/button";
 import { useCounterStore } from "shared/provider/FIlterCourProvidier";
 import useGetCourtList from "../hooks/useGetCourtList";
 import LoadingMore from "shared/components/LoadingMore";
+import { useRouter } from "next/navigation";
 
 export default function CourtList() {
-  const { search, sportType, amenities, priceRange, rating } = useCounterStore(
+  const { search, sportTypes, amenities, priceRange, rating } = useCounterStore(
     (state) => state,
   );
+  const router = useRouter();
 
   const { data, isLoading, isFetching, fetchNextPage } = useGetCourtList({
     search,
-    sportType,
+    sportTypes,
     amenities,
     min: priceRange?.min || 0,
     max: priceRange?.max || 0,
@@ -23,9 +25,15 @@ export default function CourtList() {
   });
 
   const courts = data?.pages.flatMap((page) => page.data?.contents);
+
+  console.log("CourtList Rendered", courts);
   const total = data?.pages[0]?.data?.totalCount || 0;
 
   const isStillHaveMore = courts && courts.length < total;
+
+  const handleCourtClick = (id: string) => {
+    router.push(`/court/${id}`);
+  };
 
   const handleLoadMore = () => {
     if (isLoading || isFetching) return;
@@ -40,7 +48,7 @@ export default function CourtList() {
     <div className="flex-1 w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
       <div className="flex justify-center flex-col items-center gap-4">
-        <List courts={courts || []} />
+        <List courts={courts || []} onCourtClick={handleCourtClick} />
         {!isFetching && isStillHaveMore && (
           <div className="self-start flex justify-center w-full mt-6">
             <Button
@@ -62,9 +70,15 @@ export default function CourtList() {
   );
 }
 
-function List({ courts }: { courts?: Array<any> }) {
+function List({
+  courts,
+  onCourtClick,
+}: {
+  courts?: Array<any>;
+  onCourtClick?: (id: string) => void;
+}) {
   const handleClickItem = (id: string) => {
-    console.log("Clicked court with id:", id);
+    onCourtClick?.(id);
   };
 
   return (

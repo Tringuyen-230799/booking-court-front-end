@@ -1,6 +1,6 @@
 export interface CourtQueryParams {
   search: string;
-  sportType: number[] | string[];
+  sportTypes: number[] | string[];
   amenities: number[] | string[];
   min: number;
   max: number;
@@ -22,6 +22,7 @@ export interface CourtResponse {
   images?: { imageUrl: string }[];
   createdAt: Date;
   updatedAt: Date;
+  description?: string | null;
 }
 
 export interface Court extends CourtResponse {
