@@ -21,7 +21,7 @@ const getVariantStyles = (
     primary: "bg-primary text-[#0d1b12] shadow-sm font-bold",
     secondary: "bg-white text-[#0d1b12] hover:bg-[#d5eadd] ",
     outline:
-      "border-2 border-neutral-300 text-secondary hover:bg-white",
+      "border-1 border-neutral-300 text-secondary hover:bg-white",
     link: "bg-transparent text-primary underline px-0 hover:text-[#0d1b12] shadow-none !p-0",
   };
   return styles[variant];

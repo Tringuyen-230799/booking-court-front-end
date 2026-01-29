@@ -1,7 +1,7 @@
 "use client";
 import { MdOutlineIosShare } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa6";
-import Button from "shared/components/button";
+import Button from "@/app/(components)/button";
 
 const CourtDetailBtn = () => {
   return (

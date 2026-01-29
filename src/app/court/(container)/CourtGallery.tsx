@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import Typography from "shared/components/typography";
+import Typography from "@/app/(components)/typography";
 import { cn } from "shared/utils/cn";
 
 interface CourtGalleryProps {

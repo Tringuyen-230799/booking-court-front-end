@@ -5,7 +5,7 @@ import { NavLinkItem } from "shared/types/common";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, PATH } from "shared/constant/path";
 import { FaBasketballBall } from "react-icons/fa";
-import Icon from "shared/components/Icon";
+import Icon from "@/app/(components)/Icon";
 
 interface HeaderProps {
   logoUrl: string;

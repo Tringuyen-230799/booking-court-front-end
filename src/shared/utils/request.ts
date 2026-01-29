@@ -58,22 +58,26 @@ class RequestClient {
     } = options;
 
     const url = this.buildURL(path, params);
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        cache,
+        headers: {
+          "Content-Type": "application/json",
+          ...headers,
+        },
+        ...otherOptions,
+      });
 
-    const response = await fetch(url, {
-      method: "GET",
-      cache,
-      headers: {
-        "Content-Type": "application/json",
-        ...headers,
-      },
-      ...otherOptions,
-    });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      return response.json().then((res) => res?.data);
+    } catch (error) {
+      console.error("GET request error:", error);
+      throw error;
     }
-
-    return response.json().then((res) => res?.data);
   }
 
   async post(path: string, options: RequestOptions = {}) {

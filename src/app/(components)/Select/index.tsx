@@ -4,7 +4,7 @@ import { FaChevronDown, FaTimes } from "react-icons/fa";
 import { IconType } from "react-icons";
 import { cn } from "shared/utils/cn";
 import Icon from "../Icon";
-import Typography from "shared/components/typography";
+import Typography from "@/app/(components)/typography";
 
 export interface SelectOption {
   value: string;
@@ -139,7 +139,7 @@ export default function Select({
       case "ArrowDown":
         e.preventDefault();
         setHighlightedIndex((prev) =>
-          prev < options.length - 1 ? prev + 1 : prev
+          prev < options.length - 1 ? prev + 1 : prev,
         );
         break;
       case "ArrowUp":
@@ -206,11 +206,11 @@ export default function Select({
         {(!isMulti || selectedValues.length === 0) && (
           <Typography
             variant="action"
-            size="sm"
-            as='div'
+            size="md"
+            as="div"
             className={cn(
               "truncate",
-              selectedValues.length === 0 && "text-gray-400"
+              selectedValues.length === 0 && "text-gray-400",
             )}
             color="primary-content"
           >
@@ -233,7 +233,7 @@ export default function Select({
           disabled && "opacity-50 cursor-not-allowed",
           isOpen && "ring-1 ring-primary/20",
           leadingIcon && "pl-10", // Add extra left padding when leading icon exists
-          className
+          className,
         )}
         onClick={() => !disabled && setIsOpen(!isOpen)}
         onKeyDown={handleKeyDown}
@@ -247,7 +247,7 @@ export default function Select({
         <div
           className={cn(
             "flex-1 flex items-center gap-2 min-w-0",
-            leadingIcon && "ml-1" // Add small margin when icon is present
+            leadingIcon && "ml-1", // Add small margin when icon is present
           )}
         >
           {/* Adding leading Icon */}
@@ -280,12 +280,12 @@ export default function Select({
           className={cn(
             "absolute top-full left-0 right-0 z-50 mt-1",
             "bg-white border border-gray-200 rounded-lg shadow-lg",
-            "overflow-y-scroll",
-            "p-1"
+            "overflow-y-auto",
+            "p-1",
           )}
           style={{ maxHeight: maxMenuHeight }}
         >
-          <div className="overflow-auto max-h-full">
+          <div className="overflow-auto max-h-full space-y-0.5">
             {options.length === 0 ? (
               <div className="px-3 py-2 text-gray-500 text-center">
                 {noOptionsMessage}
@@ -299,16 +299,16 @@ export default function Select({
                     key={option.value + index}
                     className={cn(
                       "px-3 py-2 cursor-pointer transition-colors rounded-sm",
-                      "flex items-center justify-between hover:bg-primary duration-300",
-                      isSelected && "bg-primary/10 text-primary",
-                      option.disabled && "opacity-50 cursor-not-allowed"
+                      "flex items-center justify-between hover:bg-primary hover:text-white duration-300",
+                      isSelected && "text-white bg-primary",
+                      option.disabled && "opacity-50 cursor-not-allowed",
                     )}
                     onClick={() => handleSelect(option)}
                     role="option"
                     aria-selected={isSelected}
                   >
                     {option.customLabel ? (
-                      <Typography variant="body" size="sm" as='div'>
+                      <Typography variant="body" size="sm" as="div">
                         {option.customLabel(option.label)}
                       </Typography>
                     ) : (

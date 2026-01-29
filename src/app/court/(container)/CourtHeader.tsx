@@ -1,7 +1,7 @@
-import Typography from "shared/components/typography";
+import Typography from "@/app/(components)/typography";
 import CourtDetailBtn from "./CourtDetailBtn";
-import Icon from "shared/components/Icon";
-import Badge from "shared/components/badge";
+import Icon from "@/app/(components)/Icon";
+import Badge from "@/app/(components)/badge";
 import { FaStar } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { CourtResponse } from "shared/types/court";

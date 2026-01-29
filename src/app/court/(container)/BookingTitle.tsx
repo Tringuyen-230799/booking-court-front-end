@@ -1,4 +1,4 @@
-import Typography, { TypographyProps } from "shared/components/typography";
+import Typography, { TypographyProps } from "@/app/(components)/typography";
 import { cn } from "shared/utils/cn";
 
 

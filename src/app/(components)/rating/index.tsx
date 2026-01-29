@@ -1,5 +1,5 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
-import Icon from "shared/components/Icon";
+import Icon from "@/app/(components)/Icon";
 import { cn } from "shared/utils/cn";
 
 interface RatingProps {

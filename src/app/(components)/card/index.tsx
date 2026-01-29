@@ -2,7 +2,7 @@
 import { Court } from "shared/types/court";
 import Button from "../button";
 import Badge from "../badge";
-import Icon from "shared/components/Icon";
+import Icon from "@/app/(components)/Icon";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import Typography from "../typography";

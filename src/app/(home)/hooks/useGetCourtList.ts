@@ -19,8 +19,6 @@ const useGetCourtList = (params: CourtQueryParams) => {
     retry: false,
   });
 
-  console.log("useGetCourtList Rendered", data);
-
   return {
     data: data,
     isLoading,

@@ -1,13 +1,14 @@
 "use server";
-import Breadcrumb from "shared/components/breadcrumb";
+import Breadcrumb from "@/app/(components)/breadcrumb";
 import Link from "next/link";
-import CourtGallery from "../container/CourtGallery";
-import CourtHeader from "../container/CourtHeader";
-import Typography from "shared/components/typography";
-import CourtBooking from "../container/CourtBooking";
-import CourtAmenities from "../container/CourtAmenities";
-import Divider from "shared/components/Divider";
+import CourtGallery from "../(container)/CourtGallery";
+import CourtHeader from "../(container)/CourtHeader";
+import Typography from "@/app/(components)/typography";
+import CourtBooking from "../(container)/CourtBooking";
+import CourtAmenities from "../(container)/CourtAmenities";
+import Divider from "@/app/(components)/Divider";
 import { getCourtDetails } from "shared/requests/courts";
+import BookingModal from "../(container)/BookingModal";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -33,7 +34,7 @@ export default async function CourtDetail({ params }: PageProps) {
             { label: "Home", href: "/" },
             { label: "Courts", href: "/court" },
             { label: court.name, isCurrentPage: true },
-          ]} 
+          ]}
         />
 
         <CourtHeader court={court} />
@@ -57,7 +58,7 @@ export default async function CourtDetail({ params }: PageProps) {
                   size="md"
                   color={description ? "default" : "muted"}
                 >
-                  {description || 'No description available for this court.'}
+                  {description || "No description available for this court."}
                 </Typography>
               </div>
             </section>
