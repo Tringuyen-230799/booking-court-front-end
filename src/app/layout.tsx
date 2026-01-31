@@ -1,10 +1,10 @@
 import "../../envConfig";
-import Header from "shared/components/header";
+import Header from "@/app/(components)/header";
 import { NAV_LINKS } from "shared/constant/path";
 import { Lexend, Noto_Sans } from "next/font/google";
 import "./styles.css";
 import QueryProviders from "shared/provider/QueryClientProvider";
-import { FilterStoreProvider } from "shared/provider/FIlterCourProvidier";
+import { FilterStoreProvider } from "shared/provider/FIlterCourtProvidier";
 
 const lexend = Lexend({
   subsets: ["latin"],

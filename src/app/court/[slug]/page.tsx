@@ -1,13 +1,16 @@
 "use server";
-import Breadcrumb from "shared/components/breadcrumb";
+import Breadcrumb from "@/app/(components)/breadcrumb";
 import Link from "next/link";
-import CourtGallery from "../container/CourtGallery";
-import CourtHeader from "../container/CourtHeader";
-import Typography from "shared/components/typography";
-import CourtBooking from "../container/CourtBooking";
-import CourtAmenities from "../container/CourtAmenities";
-import Divider from "shared/components/Divider";
+import CourtGallery from "../(container)/CourtGallery";
+import CourtHeader from "../(container)/CourtHeader";
+import Typography from "@/app/(components)/typography";
+import CourtBooking from "../(container)/CourtBooking";
+import CourtAmenities from "../(container)/CourtAmenities";
+import Divider from "@/app/(components)/Divider";
 import { getCourtDetails } from "shared/requests/courts";
+import BookingModal from "../(container)/BookingModal";
+import { eachMinuteOfInterval } from "date-fns";
+import Schedule from "shared/components/Schedule";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -20,6 +23,22 @@ export default async function CourtDetail({ params }: PageProps) {
 
   const { description, facilities } = court || {};
   const amenities = facilities?.map((facility) => facility?.name) || [];
+
+  const date = eachMinuteOfInterval(
+    {
+      start: new Date(2014, 9, 14, 6, 0),
+      end: new Date(2014, 9, 14, 23, 0),
+    },
+    {
+      step: 30,
+    },
+  );
+
+  const timeIntervals = date.map((d) => {
+    const hours = d.getHours().toString().padStart(2, "0");
+    const minutes = d.getMinutes().toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
+  });
 
   if (!court) {
     return <EmptyPage />;
@@ -46,26 +65,33 @@ export default async function CourtDetail({ params }: PageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 relative">
           <div className="lg:col-span-2">
             <section className="w-full">
+              <Schedule
+                name="Schedules"
+                periods={timeIntervals}
+                containerClassName="flex-wrap justify-start"
+                styles={{ height: 260, width: "100%" }}
+              />
+            </section>
+            <Divider className="mt-5 mb-4" />
+            <section className="w-full">
               <Typography as="h2" variant="heading" size="xl">
                 About this court
               </Typography>
-              <div className="">
-                <Typography
-                  variant="body"
-                  as="p"
-                  className="mb-4"
-                  size="md"
-                  color={description ? "default" : "muted"}
-                >
-                  {description || 'No description available for this court.'}
-                </Typography>
-              </div>
+              <Typography
+                variant="body"
+                as="p"
+                className="mb-4"
+                size="md"
+                color={description ? "default" : "muted"}
+              >
+                {description || "No description available for this court."}
+              </Typography>
             </section>
             <Divider className="mt-5 mb-4" />
             <CourtAmenities amentites={amenities} />
             <Divider className="my-7" />
           </div>
-          <CourtBooking />
+          <CourtBooking periods={timeIntervals} />
         </div>
       </div>
     </main>

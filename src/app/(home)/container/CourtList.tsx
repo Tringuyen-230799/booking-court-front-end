@@ -1,15 +1,15 @@
 "use client";
-import Icon from "shared/components/Icon";
+import Icon from "@/app/(components)/Icon";
 import { IoIosArrowDown } from "react-icons/io";
-import Card from "shared/components/card";
-import Button from "shared/components/button";
-import { useCounterStore } from "shared/provider/FIlterCourProvidier";
+import Card from "@/app/(components)/card";
+import Button from "@/app/(components)/button";
+import { useFilterStore } from "shared/provider/FIlterCourtProvidier";
 import useGetCourtList from "../hooks/useGetCourtList";
-import LoadingMore from "shared/components/LoadingMore";
+import LoadingMore from "@/app/(components)/LoadingMore";
 import { useRouter } from "next/navigation";
 
 export default function CourtList() {
-  const { search, sportTypes, amenities, priceRange, rating } = useCounterStore(
+  const { search, sportTypes, amenities, priceRange, rating } = useFilterStore(
     (state) => state,
   );
   const router = useRouter();
@@ -24,9 +24,8 @@ export default function CourtList() {
     limit: 25,
   });
 
-  const courts = data?.pages.flatMap((page) => page.data?.contents);
+  const courts = data?.pages?.flatMap((page) => page?.contents);
 
-  console.log("CourtList Rendered", courts);
   const total = data?.pages[0]?.data?.totalCount || 0;
 
   const isStillHaveMore = courts && courts.length < total;

@@ -1,5 +1,5 @@
  'use client';
-import Card from "shared/components/card";
+import Card from "@/app/(components)/card";
 
 export default function List({ courts }: { courts?: Array<any> }) {
   const handleClickItem = (id: string) => {

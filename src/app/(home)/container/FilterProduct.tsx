@@ -1,14 +1,14 @@
 "use client";
-import FilterPrice from "shared/components/FilterPrice";
-import GroupCheckbox from "shared/components/GroupCheckbox";
-import GroupRadioBox from "shared/components/GroupRadioBox";
-import Rating from "shared/components/rating";
-import Typography from "shared/components/typography";
-import Button from "shared/components/button";
-import TextField from "shared/components/TextField";
+import FilterPrice from "@/app/(components)/FilterPrice";
+import GroupCheckbox from "@/app/(components)/GroupCheckbox";
+import GroupRadioBox from "@/app/(components)/GroupRadioBox";
+import Rating from "@/app/(components)/rating";
+import Typography from "@/app/(components)/typography";
+import Button from "@/app/(components)/button";
+import TextField from "@/app/(components)/TextField";
 import { FaSearch } from "react-icons/fa";
-import Divider from "shared/components/Divider";
-import { useCounterStore } from "shared/provider/FIlterCourProvidier";
+import Divider from "@/app/(components)/Divider";
+import { useFilterStore } from "shared/provider/FIlterCourtProvidier";
 import { useCallback, useRef, useState } from "react";
 import { debounce } from "lodash";
 
@@ -33,7 +33,7 @@ export default function FilterProduct({
     rating,
     setRating,
     resetFilters,
-  } = useCounterStore((state) => state);
+  } = useFilterStore((state) => state);
   const [interalsearch, setInteralsearch] = useState(search);
   const [internalPrice, setInternalPrice] = useState<{
     min: number;

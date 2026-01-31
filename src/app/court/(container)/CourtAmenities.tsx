@@ -1,5 +1,5 @@
 "use client";
-import Icon from "shared/components/Icon";
+import Icon from "@/app/(components)/Icon";
 import BookingTitle from "./BookingTitle";
 import {
   FaBorderAll,
@@ -7,8 +7,8 @@ import {
   FaSnowflake,
   FaWifi,
 } from "react-icons/fa6";
-import Button from "shared/components/button";
-import Typography from "shared/components/typography";
+import Button from "@/app/(components)/button";
+import Typography from "@/app/(components)/typography";
 import { IconType } from "react-icons";
 import { useCallback, useState } from "react";
 

@@ -10,9 +10,9 @@ export default async function Home() {
   ]);
 
   const categoriesData =
-    categories.status === "fulfilled" ? categories?.value?.data : [];
+    categories.status === "fulfilled" ? categories?.value : [];
   const amenitiesData =
-    amentites.status === "fulfilled" ? amentites?.value?.data : [];
+    amentites.status === "fulfilled" ? amentites?.value : [];
 
   return (
     <main>

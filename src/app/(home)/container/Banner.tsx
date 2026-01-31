@@ -1,11 +1,11 @@
 "use client";
-import Select from "shared/components/Select";
+import Select from "@/app/(components)/Select";
 import { FaBasketballBall } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
-import Button from "shared/components/button";
-import Icon from "shared/components/Icon";
+import Button from "@/app/(components)/button";
+import Icon from "@/app/(components)/Icon";
 
 export default function Banner() {
   return (
