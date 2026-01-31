@@ -3,12 +3,13 @@ import Icon from "@/app/(components)/Icon";
 import { FaBasketballBall } from "react-icons/fa";
 import { TbEdit } from "react-icons/tb";
 import Typography from "@/app/(components)/typography";
-import Button from "@/app/(components)/button";
 import BookingTitle from "./BookingTitle";
-import BookingModal from "./BookingModal";
 import { useCallback, useState } from "react";
+import BookingModal from "./BookingModal";
+import Button from "@/app/(components)/button";
 
-const CourtBooking = () => {
+const CourtBooking = ({ periods }: { periods: string[] }) => {
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseModal = useCallback(() => {
@@ -21,7 +22,11 @@ const CourtBooking = () => {
 
   return (
     <>
-      <BookingModal onClose={handleCloseModal} open={isOpen} />
+      <BookingModal
+        onClose={handleCloseModal}
+        open={isOpen}
+        periods={periods}
+      />
       <div className="lg:col-span-1 relative">
         <div className="sticky top-24 space-y-6">
           <div className="bg-surface-light rounded-2xl border border-neutral-200 shadow-2xl overflow-hidden transition-all">
@@ -54,10 +59,16 @@ const CourtBooking = () => {
               <Button className="w-full" onClick={handleOpenModal}>
                 Book Now
               </Button>
-              <p className="text-center text-[11px] font-medium text-neutral-500">
+              <Typography
+                as="p"
+                size="xs"
+                color="muted"
+                variant="action"
+                className="text-center"
+              >
                 Instant confirmation. <br /> Secure payment via local banks or
                 E-wallets.
-              </p>
+              </Typography>
             </div>
           </div>
         </div>
@@ -111,7 +122,7 @@ const FareBreakdownPanel = () => {
             value="25.000₫"
             titleSize="sm"
             titleClassName="border-b border-dotted"
-            className="flex-row justify-between w-full items-center"
+              className="flex-row justify-between w-full items-center"
           />
         </div>
         <div className="pt-5 border-t border-neutral-100 flex justify-between items-center">

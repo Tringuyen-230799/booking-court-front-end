@@ -8,15 +8,18 @@ import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import { cn } from "shared/utils/cn";
 import Select from "@/app/(components)/Select";
-import { eachMinuteOfInterval, formatDate } from "date-fns";
+import { formatDate } from "date-fns";
 import Modal from "@/app/(components)/Modal";
+import Schedule from "shared/components/Schedule";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 
 interface BookingModalProps {
   onClose: () => void;
   open: boolean;
+  periods: string[];
 }
 
-const BookingModal = ({ open, onClose }: BookingModalProps) => {
+const BookingModal = ({ open, onClose, periods }: BookingModalProps) => {
   if (!open) return null;
 
   const dated = formatDate(new Date(), "MMMM dd, yyyy");
@@ -37,22 +40,26 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
         onClick: () => {},
       }}
       leftFooterContent={
-        <div className="space-y-1">
+        <div className="">
           <div className="flex items-baseline gap-2">
-            <span className="text-xs text-neutral-500">Total for 90 mins:</span>
-            <span className="text-2xl font-black text-neutral-900">
+            <Typography size="xs" variant="body" color="muted">
+              Total for 90 mins:
+            </Typography>
+            <Typography size="xl" variant="heading">
               750.000₫
-            </span>
+            </Typography>
           </div>
           <div className="flex items-center gap-2 text-xs text-neutral-500">
-            <span className="material-symbols-outlined text-[14px]">info</span>
-            <span>Price includes gear setup for Tennis</span>
+            <Icon icon={IoMdInformationCircleOutline} size="sm" />
+            <Typography size="xs" variant="body" color="muted">
+              Price includes gear setup for Tennis
+            </Typography>
           </div>
         </div>
       }
     >
       <div className="flex-1 overflow-y-auto">
-        <div className="p-6 space-y-8">
+        <div className="p-6 space-y-4">
           <section>
             <SectionTitle
               order={1}
@@ -125,24 +132,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                 />
               </div>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-5">
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-xs font-bold text-neutral-500 uppercase tracking-wider">
-                  Court A - Tennis Availability
-                </span>
-                <div className="flex gap-4">
-                  <div className="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500">
-                    <span className="size-2 rounded-full bg-primary"></span>{" "}
-                    AVAILABLE
-                  </div>
-                  <div className="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500">
-                    <span className="size-2 rounded-full bg-neutral-300"></span>{" "}
-                    BOOKED
-                  </div>
-                </div>
-              </div>
-              <BookingSchedule />
-            </div>
+            <Schedule periods={periods} name="Court A - Tennis Availability" />
           </section>
         </div>
       </div>
@@ -176,12 +166,12 @@ const SectionTitle = ({
 const GroupSport = () => {
   const arr = new Array(5);
   return (
-    <div className="flex gap-4 w-full overflow-x-auto pb-1">
+    <div className="flex gap-2 w-full overflow-x-auto pb-1">
       {arr.fill(0).map((_, index) => (
         <div key={index} className="max-w-35 min-w-36">
-          <Button variant="outline" size="lg" className="w-full">
-            <div className="w-13 h-13 rounded-full bg-primary flex items-center justify-center mb-2 text-white">
-              <Icon icon={MdSportsBasketball} size="xl" variant="inherit" />
+          <Button variant="outline" size="sm" className="w-full">
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center mb-2 text-white">
+              <Icon icon={MdSportsBasketball} size="lg" variant="inherit" />
             </div>
             <Typography
               as="span"
@@ -194,57 +184,6 @@ const GroupSport = () => {
           </Button>
         </div>
       ))}
-    </div>
-  );
-};
-
-const BookingSchedule = () => {
-  const date = eachMinuteOfInterval(
-    {
-      start: new Date(2014, 9, 14, 6, 0),
-      end: new Date(2014, 9, 14, 24, 0),
-    },
-    {
-      step: 30,
-    },
-  );
-
-  const timeIntervals = date.map((d) => {
-    const hours = d.getHours().toString().padStart(2, "0");
-    const minutes = d.getMinutes().toString().padStart(2, "0");
-    return `${hours}:${minutes}`;
-  });
-
-  const options = timeIntervals.map((time, index) => ({
-    value: time,
-    isHasSelected: index / 2 == 0,
-  }));
-
-  return (
-    <div className="relative pt-6 pb-2 overflow-x-auto">
-      <div className="flex items-end gap-1 min-w-150 h-12">
-        {options.map((option) => (
-          <div
-            key={option?.value}
-            className="flex flex-col items-center min-w-20"
-          >
-            <div
-              className={cn(
-                "w-full h-8 bg-neutral-300 rounded-sm",
-                option?.isHasSelected && "bg-primary",
-              )}
-            />
-            <Typography
-              variant="action"
-              size="xs"
-              color="muted"
-              className="mt-2"
-            >
-              {option?.value}
-            </Typography>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };

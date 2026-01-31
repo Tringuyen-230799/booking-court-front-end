@@ -29,7 +29,7 @@ const getSize = (
       sm: "text-sm leading-6 tracking-tight", // 24px / 1.5rem
       md: "text-md leading-8 tracking-tight", // 32px / 2rem
       lg: "text-xl leading-10 tracking-tight", // 40px / 2.5rem
-      xl: "text-2xl leading-[3rem] tracking-tight",
+      xl: "text-2xl leading-10 tracking-tight",
     },
     body: {
       xs: "text-[12px] leading-5", // 14px / 0.875rem
