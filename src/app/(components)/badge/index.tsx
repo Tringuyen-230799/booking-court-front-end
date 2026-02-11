@@ -1,7 +1,7 @@
 import { cn } from "shared/utils/cn";
 import Typography from "../typography";
 
-interface BadgeProps {
+export interface BadgeProps {
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "success" | "warning" | "error";
   size?: "xs" | "sm" | "md";

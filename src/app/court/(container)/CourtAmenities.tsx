@@ -1,6 +1,6 @@
 "use client";
 import Icon from "@/app/(components)/Icon";
-import BookingTitle from "./BookingTitle";
+import BookingTitle from "../../../shared/components/booking/BookingTitle";
 import {
   FaBorderAll,
   FaRulerCombined,

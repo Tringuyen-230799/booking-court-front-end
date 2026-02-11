@@ -12,14 +12,21 @@ import { formatDate } from "date-fns";
 import Modal from "@/app/(components)/Modal";
 import Schedule from "shared/components/Schedule";
 import { IoMdInformationCircleOutline } from "react-icons/io";
+import { ResponseBookingCourtDetail } from "shared/types/bookings";
 
 interface BookingModalProps {
   onClose: () => void;
   open: boolean;
-  periods: string[];
+  periods: any[];
+  schedules: ResponseBookingCourtDetail;
 }
 
-const BookingModal = ({ open, onClose, periods }: BookingModalProps) => {
+const BookingModal = ({
+  open,
+  onClose,
+  periods,
+  schedules,
+}: BookingModalProps) => {
   if (!open) return null;
 
   const dated = formatDate(new Date(), "MMMM dd, yyyy");
@@ -132,7 +139,11 @@ const BookingModal = ({ open, onClose, periods }: BookingModalProps) => {
                 />
               </div>
             </div>
-            <Schedule periods={periods} name="Court A - Tennis Availability" />
+            <Schedule
+              periods={periods}
+              name="Court A - Tennis Availability"
+              schedules={schedules || []}
+            />
           </section>
         </div>
       </div>

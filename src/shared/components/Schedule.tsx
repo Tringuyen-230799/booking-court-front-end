@@ -1,11 +1,15 @@
 import Typography from "@/app/(components)/typography";
+import { useCallback } from "react";
+import { ResponseBookingCourtDetail } from "shared/types/bookings";
 import { cn } from "shared/utils/cn";
+import { convertHoursMinutesFormat } from "shared/utils/dates";
 
 interface ScheduleProps {
-  periods: string[];
+  periods: any[];
   containerClassName?: string;
   styles?: React.CSSProperties;
   name?: string;
+  schedules: ResponseBookingCourtDetail;
 }
 
 const Schedule = ({
@@ -13,11 +17,51 @@ const Schedule = ({
   containerClassName,
   styles,
   name,
+  schedules,
 }: ScheduleProps) => {
+  const statusStyles: Record<keyof typeof BOOKING_STATUS & undefined, string> =
+    {
+      PENDING_PAYMENT: "bg-yellow-500",
+      CONFIRMED: "bg-blue-500",
+      COMPLETED: "bg-green-500",
+      CANCELLED: "bg-red-500",
+      EXPIRED: "bg-gray-500",
+      undefined: "bg-gray-200",
+    };
+
+  // Map the schedules to determine the status of each time period (1)
+  // Create Function to compare time periods with schedules (2)
+  // Loop all the schedules to find the matching time period
+  // If found, get the status from the schedule
+  // If not found, status is undefined (available)
+
+  const scheduleMap = new Map<string, any>();
+  schedules.forEach((schedule) => {
+    scheduleMap.set(schedule.id, {
+      startTime: schedule.startTime,
+      endTime: schedule.endTime,
+      status: schedule.status,
+    });
+  });
+
+  const getBookingTheStatus = useCallback(
+    (schedule: Map<string, any>, currentTime: Date) => {
+      for (const keys of schedule.keys()) {
+        const period = schedule.get(keys);
+        const periodStartTime = new Date(period?.startTime);
+        const periodEndTime = new Date(period?.endTime);
+        if (currentTime >= periodStartTime && currentTime <= periodEndTime) {
+          return period?.status;
+        }
+      }
+    },
+    [],
+  );
+
   const options =
-    periods.map((time, index) => ({
-      value: time,
-      isHasSelected: index / 2 == 0,
+    periods.map((time: Date) => ({
+      value: convertHoursMinutesFormat(time),
+      status: getBookingTheStatus(scheduleMap, time),
     })) || [];
 
   return (
@@ -69,7 +113,7 @@ const Schedule = ({
               <div
                 className={cn(
                   "w-full h-8 bg-neutral-300 rounded-sm",
-                  option?.isHasSelected && "bg-primary",
+                  statusStyles[option.status] as keyof typeof BOOKING_STATUS,
                 )}
               />
               <Typography

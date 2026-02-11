@@ -3,13 +3,19 @@ import Icon from "@/app/(components)/Icon";
 import { FaBasketballBall } from "react-icons/fa";
 import { TbEdit } from "react-icons/tb";
 import Typography from "@/app/(components)/typography";
-import BookingTitle from "./BookingTitle";
 import { useCallback, useState } from "react";
-import BookingModal from "./BookingModal";
+import BookingModal from "shared/components/booking/BookingModal";
 import Button from "@/app/(components)/button";
+import { ResponseBookingCourtDetail } from "shared/types/bookings";
+import BookingTitle from "shared/components/booking/BookingTitle";
 
-const CourtBooking = ({ periods }: { periods: string[] }) => {
-
+const CourtBooking = ({
+  periods,
+  schedules,
+}: {
+  periods: any[];
+  schedules: ResponseBookingCourtDetail;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseModal = useCallback(() => {
@@ -26,6 +32,7 @@ const CourtBooking = ({ periods }: { periods: string[] }) => {
         onClose={handleCloseModal}
         open={isOpen}
         periods={periods}
+        schedules={schedules}
       />
       <div className="lg:col-span-1 relative">
         <div className="sticky top-24 space-y-6">
@@ -54,7 +61,7 @@ const CourtBooking = ({ periods }: { periods: string[] }) => {
               </div>
             </div>
             <div className="p-6 space-y-6">
-              <BookingSection onOpenModal={handleOpenModal} />
+              <Section onOpenModal={handleOpenModal} />
               <FareBreakdownPanel />
               <Button className="w-full" onClick={handleOpenModal}>
                 Book Now
@@ -77,7 +84,7 @@ const CourtBooking = ({ periods }: { periods: string[] }) => {
   );
 };
 
-const BookingSection = ({ onOpenModal }: { onOpenModal: () => void }) => {
+const Section = ({ onOpenModal }: { onOpenModal: () => void }) => {
   return (
     <div
       onClick={onOpenModal}
@@ -122,7 +129,7 @@ const FareBreakdownPanel = () => {
             value="25.000₫"
             titleSize="sm"
             titleClassName="border-b border-dotted"
-              className="flex-row justify-between w-full items-center"
+            className="flex-row justify-between w-full items-center"
           />
         </div>
         <div className="pt-5 border-t border-neutral-100 flex justify-between items-center">

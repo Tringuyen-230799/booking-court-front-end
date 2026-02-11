@@ -8,37 +8,38 @@ import CourtBooking from "../(container)/CourtBooking";
 import CourtAmenities from "../(container)/CourtAmenities";
 import Divider from "@/app/(components)/Divider";
 import { getCourtDetails } from "shared/requests/courts";
-import BookingModal from "../(container)/BookingModal";
 import { eachMinuteOfInterval } from "date-fns";
 import Schedule from "shared/components/Schedule";
+import { getBookingCourtDetails } from "shared/requests/bookings";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export default async function CourtDetail({ params }: PageProps) {
+  const dates = new Date();
+  const month = dates.getMonth();
+  const day = dates.getDate();
+  const year = dates.getFullYear();
   const { slug } = await params;
 
   const court = await getCourtDetails(slug);
+  const schedules = await getBookingCourtDetails(slug, {
+    date: dates.toISOString(),
+  });
 
   const { description, facilities } = court || {};
   const amenities = facilities?.map((facility) => facility?.name) || [];
 
-  const date = eachMinuteOfInterval(
+  const periods = eachMinuteOfInterval(
     {
-      start: new Date(2014, 9, 14, 6, 0),
-      end: new Date(2014, 9, 14, 23, 0),
+      start: new Date(year, month, day, 6, 0),
+      end: new Date(year, month, day, 23, 0),
     },
     {
       step: 30,
     },
   );
-
-  const timeIntervals = date.map((d) => {
-    const hours = d.getHours().toString().padStart(2, "0");
-    const minutes = d.getMinutes().toString().padStart(2, "0");
-    return `${hours}:${minutes}`;
-  });
 
   if (!court) {
     return <EmptyPage />;
@@ -67,9 +68,10 @@ export default async function CourtDetail({ params }: PageProps) {
             <section className="w-full">
               <Schedule
                 name="Schedules"
-                periods={timeIntervals}
+                periods={periods}
                 containerClassName="flex-wrap justify-start"
                 styles={{ height: 260, width: "100%" }}
+                schedules={schedules}
               />
             </section>
             <Divider className="mt-5 mb-4" />
@@ -91,7 +93,7 @@ export default async function CourtDetail({ params }: PageProps) {
             <CourtAmenities amentites={amenities} />
             <Divider className="my-7" />
           </div>
-          <CourtBooking periods={timeIntervals} />
+          <CourtBooking periods={periods} schedules={schedules} />
         </div>
       </div>
     </main>

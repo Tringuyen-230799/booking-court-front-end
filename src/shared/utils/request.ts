@@ -42,6 +42,8 @@ class RequestClient {
         });
       }
 
+      console.log('Url: ', url.toString());
+
       return url.toString();
     } catch (error) {
       console.error("Error building URL:", error);
@@ -68,10 +70,6 @@ class RequestClient {
         },
         ...otherOptions,
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
 
       return response.json().then((res) => res?.data);
     } catch (error) {
