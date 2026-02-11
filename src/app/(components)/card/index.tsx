@@ -6,6 +6,7 @@ import Icon from "@/app/(components)/Icon";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import Typography from "../typography";
+import { formatVND } from "shared/utils/common";
 
 interface CardProps {
   onClick?: (id: string) => void;
@@ -74,10 +75,10 @@ export default function Card({ court, onClick }: CardProps) {
               Starting from
             </Typography>
             <Typography variant="action" color="default" size="lg">
-              ${hourlyPrice}
+              {formatVND(hourlyPrice)}₫
             </Typography>
             <Typography variant="action" color="muted">
-              /hr
+              /Giờ
             </Typography>
           </div>
           <Button

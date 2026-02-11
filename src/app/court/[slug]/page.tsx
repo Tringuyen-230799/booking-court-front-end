@@ -93,7 +93,7 @@ export default async function CourtDetail({ params }: PageProps) {
             <CourtAmenities amentites={amenities} />
             <Divider className="my-7" />
           </div>
-          <CourtBooking periods={periods} schedules={schedules} />
+          <CourtBooking periods={periods} schedules={schedules} price={court.hourlyPrice}/>
         </div>
       </div>
     </main>

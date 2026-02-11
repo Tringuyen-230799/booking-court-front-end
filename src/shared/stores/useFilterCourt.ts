@@ -29,7 +29,7 @@ export const defaultInitState: FilterCourState = {
   search: "",
   sportTypes: [],
   amenities: [],
-  priceRange: { min: 0, max: 100000 },
+  priceRange: { min: 0, max: 1000000 },
   rating: 4,
 };
 
